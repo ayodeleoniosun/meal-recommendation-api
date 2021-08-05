@@ -70,7 +70,7 @@ $factory->define(
      MainItem::class,
      function (Faker\Generator $faker) {
          return [
-            'meal_id' => factory(Meal::class)->id,
+            'meal_id' => $faker->randomDigit,
             'name' => $faker->name,
         ];
      }
@@ -80,29 +80,28 @@ $factory->define(
      MealToSideItem::class,
      function (Faker\Generator $faker) {
          return [
-             'meal_id' => factory(Meal::class)->id,
-             'side_item_id' => factory(SideItem::class)->id,
-            'name' => $faker->name,
+             'meal_id' => $faker->randomDigit,
+             'side_item_id' => $faker->randomDigit,
         ];
      }
  );
 
  $factory->define(
      MealToAllergy::class,
-     function () {
+     function (Faker\Generator $faker) {
          return [
-             'meal_id' => factory(Meal::class)->id,
-             'allergy_id' => factory(Allergy::class)->id
+             'meal_id' => $faker->randomDigit,
+             'allergy_id' => $faker->randomDigit
         ];
      }
  );
 
  $factory->define(
      UserToAllergy::class,
-     function () {
+     function (Faker\Generator $faker) {
          return [
-             'user_id' => factory(User::class)->id,
-             'allergy_id' => factory(Allergy::class)->id
+             'user_id' => $faker->randomDigit,
+             'allergy_id' => $faker->randomDigit
         ];
      }
  );
