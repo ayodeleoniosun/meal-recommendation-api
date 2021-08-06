@@ -1,62 +1,71 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Url Shortener API
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Description
 
-## About Laravel
+This repository implemented a meal recommendation system REST API with the following features:
+1. The system should operate on three Allergies: 
+    1. Nut Allergy
+    2. ShellFish Allergy
+    3. SeaFood Allergy
+2. Every user on the system should be able to pick their allergies (ranging from zero to all the allergies provided by the system).
+3. The system should be able to accommodate at least 50 meals (Each meal should have a main item & at least 2 side items) at any time (with allergies for these meals)
+4. The system should have the ability to recommend meals to users based on their allergies.
+    1. For better clarity, this means:
+        1. Every user has the ability to fetch meal recommendations at any time.
+5. The system should also be able to fetch meal recommendations for more than one user at a time. (example: fetch meal recommendations for 10 users at a time)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Table of Content
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- [Installation](#installation)
+- [Documentation](#documentation)
+- [Testing](#testing)
+## Installation
+The entity relationship diagram is available [here](https://dbdiagram.io/d/610d504d2ecb310fc3c0cf9b).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+#### Step 1: Clone the repository
 
-## Learning Laravel
+```bash
+git clone https://github.com/ayodeleoniosun/meal-recommendation-api.git
+```
+#### Step 2: Switch to repo folder
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+cd meal-recommendation-api
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+#### Step 3: Install all dependencies using composer
 
-## Laravel Sponsors
+```bash
+composer install
+```
+#### Step 4: Setup environment variables
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+- Copy `.env.example` to `.env` i.e `cp .env.exaample .env`
+- Update DB\_ variables to your database configuration details
+- Update other variables as needed#### Step 4: Setup database
 
-### Premium Partners
+#### Step 5: Generate a new application key
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/)**
-- **[OP.GG](https://op.gg)**
+```bash
+php artisan key:generate
+```
+#### Step 6: Run database migration and seeder
 
-## Contributing
+```bash
+php artisan migrate:fresh --seed
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+#### Step 6: Start development server
 
-## Code of Conduct
+```bash
+php artisan serve
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+You can now access the api at http://localhost:8000/api/v1
+## Documentation
 
-## Security Vulnerabilities
+After starting the project in development mode, the API documentation is available [here](https://localhost:000/api/docs/).
+## Testing
+#### Run test
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```bash
+vendor/bin/phpunit tests/v1/Feature
+```
