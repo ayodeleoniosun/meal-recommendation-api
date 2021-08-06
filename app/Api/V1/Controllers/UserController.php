@@ -27,7 +27,7 @@ class UserController extends Controller
         }
         
         $response = $this->userInterface->register($request->all());
-        return response()->json($response, 200);
+        return response()->json($response, 201);
     }
 
     public function login(Request $request)

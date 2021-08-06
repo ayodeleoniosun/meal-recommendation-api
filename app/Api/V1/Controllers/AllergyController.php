@@ -34,6 +34,6 @@ class AllergyController extends Controller
         
         $response = $this->allergyInterface->pickAllergies($request->all());
     
-        return response()->json($response, 200);
+        return response()->json($response, 201);
     }
 }
