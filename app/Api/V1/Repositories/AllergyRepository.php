@@ -39,7 +39,7 @@ class AllergyRepository implements AllergyInterface
         $userAllergies = collect($user->allergies->pluck('id')->toArray());
         $allAllergies = count($allergies) > count($userAllergies) ? collect($allergies)->diff($userAllergies) :
             collect($userAllergies)->diff($allergies);
-        
+
         if (count($allAllergies) == 0) {
             throw new CustomApiErrorResponseHandler("No allergy picked");
         }

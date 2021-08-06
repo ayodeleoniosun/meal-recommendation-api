@@ -5,10 +5,11 @@ namespace Tests\V1\Feature;
 use App\Api\V1\Models\Allergy;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\V1\TestCase;
+use Tests\V1\Traits\Allergy as TraitsAllergy;
 
 class AllergyControllerTest extends TestCase
 {
-    use DatabaseTransactions;
+    use DatabaseTransactions, TraitsAllergy;
 
     public function setUp(): void
     {
@@ -25,12 +26,8 @@ class AllergyControllerTest extends TestCase
 
     public function testPickAllergySuccessful()
     {
-        $allergies = factory(Allergy::class, 3)->create();
-        $allergies = $allergies->pluck('id')->toArray();
-        
-        $response = $this->req()->json('POST', $this->route("/users/allergies"), ["allergies" => $allergies]);
+        $response = $this->pickAllergy();
         $response->assertStatus(200);
         $this->assertEquals($response->getData()->status, 'success');
-        $this->assertEquals($response->getData()->message, count($allergies).' allergies successfully picked');
     }
 }
