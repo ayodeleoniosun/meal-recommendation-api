@@ -28,7 +28,7 @@ abstract class TestCase extends BaseTestCase
     public function req()
     {
         $this->user = $this->registerUser();
-        $token = $this->user->getData()->data->bearer_token;
+        $token = $this->user->getData()->user->bearer_token;
         
         return $this->withHeaders(
             [

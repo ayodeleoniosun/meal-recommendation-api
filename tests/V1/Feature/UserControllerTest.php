@@ -15,7 +15,7 @@ class UserControllerTest extends TestCase
         parent::setup();
     }
 
-    public function testRequiredDetailsPresentInAccountCreation()
+    public function testRequiredDetailsNotPresentInAccountCreation()
     {
         $data = [
             'first_name' => $this->faker->firstName,
