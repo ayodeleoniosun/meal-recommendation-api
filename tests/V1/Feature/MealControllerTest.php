@@ -8,13 +8,15 @@ use App\Api\V1\Models\Meal;
 use App\Api\V1\Models\MealToAllergy;
 use App\Api\V1\Models\MealToSideItem;
 use App\Api\V1\Models\SideItem;
+use App\Api\V1\Models\User;
+use Tests\V1\Traits\Allergy as TraitsAllergy;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\DB;
 use Tests\V1\TestCase;
 
 class MealControllerTest extends TestCase
 {
-    use DatabaseTransactions;
+    use DatabaseTransactions, TraitsAllergy;
 
     public function setUp(): void
     {
@@ -46,14 +48,16 @@ class MealControllerTest extends TestCase
     {
         $count = 1;
         $allergies = factory(Allergy::class, 3)->create();
-        $meal = factory(Meal::class, 1)->create();
+        $meal = factory(Meal::class, $count)->create();
         $meal = Meal::find($meal[0]->id);
         $sideItems = factory(SideItem::class, 5)->create();
 
         DB::transaction(function () use ($meal, $allergies, $sideItems, $count) {
-            factory(MainItem::class, 1)->create([
+            factory(MainItem::class, $count)->create([
                 'meal_id' => $meal->id
             ]);
+
+            $sideItems = $sideItems->random(3);
 
             foreach ($sideItems as $side_item) {
                 factory(MealToSideItem::class, $count)->create([
@@ -62,6 +66,8 @@ class MealControllerTest extends TestCase
                 ]);
             }
 
+            $allergy = $allergies->random(2)->first();
+            
             foreach ($allergies as $allergy) {
                 factory(MealToAllergy::class, $count)->create([
                     'meal_id' => $meal->id,
@@ -82,6 +88,31 @@ class MealControllerTest extends TestCase
                 ],
                 'side_items' => [
                     '*' => ['id', 'name', 'created_at', 'updated_at', 'active_status']
+                ]
+            ]
+        ]);
+    }
+
+    public function testRecommendMealForSingleUser()
+    {
+        $allergies = $this->pickAllergy();
+        $user_id = $allergies->getData()->allergies[0]->pivot->user_id;
+        $token = User::find($user_id)->bearer_token;
+
+        $response = $this->req($token)->json('GET', $this->route("/users/meals/recommendations"));
+        $response->assertStatus(200);
+        $this->assertEquals($response->getData()->status, 'success');
+        $response->assertJsonStructure([
+            'status',
+            'recommendations' => [
+                '*' => [
+                    'id', 'name', 'created_at', 'updated_at', 'active_status',
+                    'main_item' => [
+                        'id', 'name', 'created_at', 'updated_at', 'active_status'
+                    ],
+                    'side_items' => [
+                        '*' => ['id', 'name', 'created_at', 'updated_at', 'active_status']
+                    ]
                 ]
             ]
         ]);
