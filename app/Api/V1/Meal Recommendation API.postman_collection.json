@@ -1,0 +1,236 @@
+{
+	"info": {
+		"_postman_id": "674a9812-b8db-426e-bea1-ea538ea99248",
+		"name": "Meal Recommendation API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Accounts",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email_address\" : \"ayodeleoniosun63@gmail.com\",\n    \"first_name\" : \"ayodele\",\n    \"last_name\" : \"oniosun\",\n    \"password\" : \"123456\",\n    \"phone_number\" : \"08132016744\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{accounts}}/register",
+							"host": [
+								"{{accounts}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email_address\" : \"ayodeleoniosun63@gmail.com\",\n    \"password\" : \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{accounts}}/login",
+							"host": [
+								"{{accounts}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Pick Allergies",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer 9e57e61217cf0ed4a392f1f3234502ade5b928f30282de9bee37ddcc72d71f63",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"allergies\" : [1, 3, 2]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{users}}/allergies",
+							"host": [
+								"{{users}}"
+							],
+							"path": [
+								"allergies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "My Allergies",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer 9e57e61217cf0ed4a392f1f3234502ade5b928f30282de9bee37ddcc72d71f63",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{users}}/my-allergies",
+							"host": [
+								"{{users}}"
+							],
+							"path": [
+								"my-allergies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Recommend Meals",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer 9e57e61217cf0ed4a392f1f3234502ade5b928f30282de9bee37ddcc72d71f63",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{users}}/meals/recommendations",
+							"host": [
+								"{{users}}"
+							],
+							"path": [
+								"meals",
+								"recommendations"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Meals",
+			"item": [
+				{
+					"name": "All Meals",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{meals}}",
+							"host": [
+								"{{meals}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View Meal Details",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{meals}}/1",
+							"host": [
+								"{{meals}}"
+							],
+							"path": [
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "v1",
+			"value": "http://127.0.0.1:8000/api/v1"
+		},
+		{
+			"key": "accounts",
+			"value": "{{v1}}/accounts"
+		},
+		{
+			"key": "users",
+			"value": "{{v1}}/users"
+		},
+		{
+			"key": "meals",
+			"value": "{{v1}}/meals"
+		}
+	]
+}
