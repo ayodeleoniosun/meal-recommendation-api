@@ -3,14 +3,11 @@
 namespace App\Api\V1\Repositories;
 
 use App\Exceptions\CustomApiErrorResponseHandler;
-use App\Api\ApiUtility;
 use App\Api\V1\Models\Allergy;
 use App\Api\V1\Interfaces\AllergyInterface;
-use App\Api\V1\Models\ActiveStatus;
 use App\Api\V1\Models\User;
 use App\Api\V1\Models\UserToAllergy;
 use App\Api\V1\Resources\UserAllergyResource;
-use Illuminate\Support\Facades\Auth;
 
 class AllergyRepository implements AllergyInterface
 {

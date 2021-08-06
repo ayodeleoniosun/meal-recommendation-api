@@ -6,7 +6,6 @@ use App\Exceptions\CustomApiErrorResponseHandler;
 use App\Api\ApiUtility;
 use App\Api\V1\Models\User;
 use App\Api\V1\Interfaces\UserInterface;
-use App\Api\V1\Models\ActiveStatus;
 use Illuminate\Support\Facades\Auth;
 
 class UserRepository implements UserInterface
