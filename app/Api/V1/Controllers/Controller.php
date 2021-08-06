@@ -26,7 +26,7 @@ class Controller extends BaseController
      *
      * @OA\Server(
      *      url=L5_SWAGGER_CONST_HOST,
-     *      description="Demo API Server"
+     *      description="Test Server"
      * )
      *
      *

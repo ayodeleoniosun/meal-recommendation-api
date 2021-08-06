@@ -15,7 +15,7 @@
     "servers": [
         {
             "url": "http://localhost:8000/api/v1",
-            "description": "Demo API Server"
+            "description": "Test server"
         }
     ],
     "paths": {
@@ -297,6 +297,83 @@
                         "bearer_token": []
                     }
                 ]
+            }
+        },
+        "/meals/recommendations": {
+            "post": {
+                "tags": [
+                    "Meals"
+                ],
+                "summary": "Show meals recommendations for multiple users",
+                "description": "Show meals recommendations for multiple users",
+                "operationId": "75ecae9a2d2a938884de0023b2288b68",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "users"
+                                ],
+                                "properties": {
+                                    "users": {
+                                        "type": "array",
+                                        "items": {}
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful registration",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "description": "The response code",
+                                            "type": "string"
+                                        },
+                                        "recommendations": {
+                                            "description": "data",
+                                            "type": "array",
+                                            "items": {}
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "description": "The response code",
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "description": "The response message",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "500": {
+                        "description": "An error occured"
+                    }
+                }
             }
         },
         "/accounts/register": {

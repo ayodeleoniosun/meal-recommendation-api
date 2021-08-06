@@ -160,43 +160,75 @@ class MealController extends Controller
     }
 
     /**
-     * Show meals recommendation for any set of user
+     * Show meals recommendations for multiple users
      *
-     * @OA\Get(
+     * @OA\Post(
      *      path="/meals/recommendations",
+     *      summary="Show meals recommendations for multiple users",
+     *      description="Show meals recommendations for multiple users",
      *      tags={"Meals"},
-     *      security={{"bearer_token":{}}},
-     *      summary="Show meal recommendations for users based on their allergy",
-     *      description="Show meal recommendations for users based on their allergy",
+     *      @OA\RequestBody(
+     *         @OA\JsonContent(
+     *           type="object",
+     *           required={"users"},
+     *             @OA\Property(
+     *                  property="users",
+     *                  type="array",
+     *                  @OA\Items()
+     *              ),
+     *          )
+     *      ),
      *
-     *     @OA\Response(
+     *      @OA\Response(
      *          response=200,
-     *          description="Successful operation",
+     *          description="successful registration",
      *          content={
      *              @OA\MediaType(
-     *                  mediaType="application/json",
-     *              @OA\Schema(
-     *                @OA\Property(
-        *                  property="status",
-        *                  type="string",
-        *                  description="The response code"
-     *                 ),
-     *                 @OA\Property(
-     *                      property="recommendations",
-     *                      type="array",
-     *                      description="The response data",
-     *                      @OA\Items()
-     *                  ),
-     *              )
-     *           )
-     *         }
+     *                 mediaType="application/json",
+     *                 @OA\Schema(
+     *                     @OA\Property(
+     *                         property="status",
+     *                         type="string",
+     *                         description="The response code"
+     *                     ),
+     *                     @OA\Property(
+     *                         property="recommendations",
+     *                         type="array",
+     *                         description="data",
+     *                         @OA\Items
+     *                     ),
+     *                    )
+     *                 )
+     *              }
+     *       ),
+     *      @OA\Response(
+     *              response=400,
+     *              description="Bad request",
+     *              content={
+     *              @OA\MediaType(
+     *                 mediaType="application/json",
+     *                 @OA\Schema(
+     *                     @OA\Property(
+     *                         property="status",
+     *                         type="string",
+     *                         description="The response code"
+     *                     ),
+     *                     @OA\Property(
+     *                         property="message",
+     *                         type="string",
+     *                         description="The response message"
+     *                     ),
+     *                    )
+     *                 )
+     *              }
      *      ),
-     *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=401, description="Unauthorized access"),
-     *      @OA\Response(response=404, description="Resource not found"),
-     *      @OA\Response(response=500, description="An error occured."),
-     *     )
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     *      @OA\Response(response=500, description="An error occured"),
+     *
+     * )
+     *
      */
+
 
     public function recommendations(Request $request)
     {

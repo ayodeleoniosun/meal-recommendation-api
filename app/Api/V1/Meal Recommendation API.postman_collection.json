@@ -15,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email_address\" : \"ayodeleoniosun63@gmail.com\",\n    \"first_name\" : \"ayodele\",\n    \"last_name\" : \"oniosun\",\n    \"password\" : \"123456\",\n    \"phone_number\" : \"08132016744\"\n}",
+							"raw": "{\n    \"email_address\" : \"ayodeleoniosun@gmail.com\",\n    \"first_name\" : \"ayodele\",\n    \"last_name\" : \"oniosun\",\n    \"password\" : \"123456\",\n    \"phone_number\" : \"08132016744\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -41,7 +41,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email_address\" : \"ayodeleoniosun63@gmail.com\",\n    \"password\" : \"123456\"\n}",
+							"raw": "{\n    \"email_address\" : \"ayodeleoniosun@gmail.com\",\n    \"password\" : \"123456\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -72,7 +72,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer 9e57e61217cf0ed4a392f1f3234502ade5b928f30282de9bee37ddcc72d71f63",
+								"value": "Bearer f74df8ad94d9318824011d633df7962962a364d93e89e51b9bd91b7cae1673c3",
 								"type": "text"
 							}
 						],
@@ -104,7 +104,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer 9e57e61217cf0ed4a392f1f3234502ade5b928f30282de9bee37ddcc72d71f63",
+								"value": "Bearer f74df8ad94d9318824011d633df7962962a364d93e89e51b9bd91b7cae1673c3",
 								"type": "text"
 							}
 						],
@@ -127,7 +127,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer 9e57e61217cf0ed4a392f1f3234502ade5b928f30282de9bee37ddcc72d71f63",
+								"value": "Bearer 44c7f2f6d964c2dbb25f2e348b3ad7ba428c349b10d3b2f65f3949fac5698291",
 								"type": "text"
 							}
 						],
@@ -187,6 +187,38 @@
 							],
 							"path": [
 								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Recommend Meals for Users",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"users\" : [1, 2, 3]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{meals}}/recommendations",
+							"host": [
+								"{{meals}}"
+							],
+							"path": [
+								"recommendations"
 							]
 						}
 					},
