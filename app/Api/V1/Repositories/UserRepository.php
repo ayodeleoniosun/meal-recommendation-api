@@ -29,6 +29,7 @@ class UserRepository implements UserInterface
         ]);
         
         return [
+            'status' => 'success',
             'user' => $user,
             'message' => 'Registration successful.'
         ];
@@ -48,6 +49,7 @@ class UserRepository implements UserInterface
         $user = auth()->user();
         
         return [
+            'status' => 'success',
             'user' => $user,
             'message' => 'Login successful'
         ];

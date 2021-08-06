@@ -82,7 +82,7 @@ class UserControllerTest extends TestCase
     public function testEmailAddressExist()
     {
         $user = $this->registerUser();
-        $emailAddress = $user->getData()->data->email_address;
+        $emailAddress = $user->getData()->user->email_address;
         $response = $this->registerUser($emailAddress);
 
         $response->assertStatus(400);
@@ -97,7 +97,7 @@ class UserControllerTest extends TestCase
         $response->assertJsonStructure(
             [
                 'status',
-                'data',
+                'user',
                 'message'
             ]
         );
@@ -124,13 +124,13 @@ class UserControllerTest extends TestCase
         $user = $this->registerUser();
         
         $data = [
-            'email_address' => $user->getData()->data->email_address,
+            'email_address' => $user->getData()->user->email_address,
             'password' => 'secret',
         ];
         
         $response = $this->json('POST', $this->route("/accounts/login"), $data);
         $response->assertStatus(200);
         $this->assertEquals($response->getData()->status, 'success');
-        $this->assertEquals($response->getData()->data->message, 'Login successful');
+        $this->assertEquals($response->getData()->message, 'Login successful');
     }
 }

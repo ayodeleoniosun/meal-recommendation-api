@@ -27,17 +27,12 @@ class UserController extends Controller
         }
         
         $response = $this->userInterface->register($request->all());
-    
-        return response()->json([
-            'status' => 'success',
-            'data' => $response['user'],
-            'message' => $response['message']
-        ], 200);
+        return response()->json($response, 200);
     }
 
     public function login(Request $request)
     {
         $response = $this->userInterface->login($request->all());
-        return response()->json(['status' => 'success', 'data' => $response], 200);
+        return response()->json($response, 200);
     }
 }
