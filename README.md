@@ -39,7 +39,7 @@ composer install
 
 - Copy `.env.example` to `.env` i.e `cp .env.exaample .env`
 - Update DB\_ variables to your database configuration details
-- Update other variables as needed#### Step 4: Setup database
+- Update other variables as needed
 
 #### Step 5: Generate a new application key
 
