@@ -105,4 +105,32 @@ class UserControllerTest extends TestCase
         $this->assertEquals($response->getData()->status, 'success');
         $this->assertEquals($response->getData()->message, 'Registration successful.');
     }
+
+    public function testIncorrectLoginDetails()
+    {
+        $data = [
+            'email_address' => $this->faker->unique()->safeEmail,
+            'password' => 'secret',
+        ];
+
+        $response = $this->json('POST', $this->route("/accounts/login"), $data);
+        $response->assertStatus(400);
+        $this->assertEquals($response->getData()->status, 'error');
+        $this->assertEquals($response->getData()->message, 'Incorrect login credentials. Try again.');
+    }
+
+    public function testLoginSuccessful()
+    {
+        $user = $this->registerUser();
+        
+        $data = [
+            'email_address' => $user->getData()->data->email_address,
+            'password' => 'secret',
+        ];
+        
+        $response = $this->json('POST', $this->route("/accounts/login"), $data);
+        $response->assertStatus(200);
+        $this->assertEquals($response->getData()->status, 'success');
+        $this->assertEquals($response->getData()->data->message, 'Login successful');
+    }
 }
