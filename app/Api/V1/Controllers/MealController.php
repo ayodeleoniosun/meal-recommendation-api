@@ -19,4 +19,10 @@ class MealController extends Controller
         $response = $this->mealInterface->index($request->all());
         return response()->json($response, 200);
     }
+
+    public function show($id)
+    {
+        $response = $this->mealInterface->show($id);
+        return response()->json($response, 200);
+    }
 }

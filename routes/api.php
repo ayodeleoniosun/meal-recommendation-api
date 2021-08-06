@@ -29,6 +29,7 @@ Route::group(
 
         Route::group(['prefix' => 'meals'], function () {
             Route::get('/', 'MealController@index')->name('meals.index');
+            Route::get('/{id}', 'MealController@show')->name('meals.show');
         });
     }
 );
