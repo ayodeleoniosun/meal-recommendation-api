@@ -34,4 +34,10 @@ class UserController extends Controller
             'message' => $response['message']
         ], 200);
     }
+
+    public function login(Request $request)
+    {
+        $response = $this->userInterface->login($request->all());
+        return response()->json(['status' => 'success', 'data' => $response], 200);
+    }
 }

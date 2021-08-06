@@ -6,6 +6,8 @@ use App\Exceptions\CustomApiErrorResponseHandler;
 use App\Api\ApiUtility;
 use App\Api\V1\Models\User;
 use App\Api\V1\Interfaces\UserInterface;
+use App\Api\V1\Models\ActiveStatus;
+use Illuminate\Support\Facades\Auth;
 
 class UserRepository implements UserInterface
 {
@@ -29,6 +31,26 @@ class UserRepository implements UserInterface
         return [
             'user' => $user,
             'message' => 'Registration successful.'
+        ];
+    }
+
+    public function login(array $data) : array
+    {
+        $data = (object) $data;
+
+        if (!Auth::attempt([
+            'email_address' => $data->email_address,
+            'password' => $data->password,
+            'active_status' => ActiveStatus::ACTIVE
+        ])) {
+            throw new CustomApiErrorResponseHandler("Incorrect login credentials. Try again.");
+        }
+
+        $user = auth()->user();
+        
+        return [
+            'user' => $user,
+            'message' => 'Login successful'
         ];
     }
 }
