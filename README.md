@@ -59,7 +59,9 @@ php artisan migrate:fresh --seed
 php artisan serve
 ```
 
-You can now access the api at http://localhost:8000/api/v1
+You can now access the api locally at http://localhost:8000/api/v1
+
+You can now access the api remotely [here](https://ayodele-meals-recommendation.herokuapp.com/api/v1).
 ## Documentation
 
 Publish the swagger documentation by running this
@@ -69,7 +71,9 @@ php artisan vendor:publish --provider "L5Swagger\L5SwaggerServiceProvider"
 
 After starting the project in development mode, you can import the postman collection [here](http://github.com/ayodeleoniosun/meal-recommendation-api/blob/develop/app/Api/V1/Meal%20Recommendation%20API.postman_collection.json).
 
-The API documentation is available [here](http://localhost:8000/api/documentation).
+The API documentation is available locally [here](http://localhost:8000/api/documentation).
+
+The API documentation is available remotely [here](https://ayodele-meals-recommendation.herokuapp.com/api/documentation).
 ## Testing
 #### Run test
 
