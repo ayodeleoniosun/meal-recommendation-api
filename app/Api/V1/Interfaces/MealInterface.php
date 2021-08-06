@@ -9,4 +9,6 @@ interface MealInterface
     public function show(int $id): array;
 
     public function userRecommendations(array $data): array;
+
+    public function recommendations(array $data): array;
 }

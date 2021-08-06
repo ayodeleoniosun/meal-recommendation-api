@@ -55,4 +55,30 @@ class MealRepository implements MealInterface
             'recommendations' => MealResource::collection($recommendations)
         ];
     }
+
+    public function recommendations(array $data): array
+    {
+        $data = (object) $data;
+        $users = $data->users;
+        $recommendations = [];
+
+        foreach ($users as $user) {
+            $user = User::find($user);
+
+            if ($user) {
+                $userAllergies = $user->allergies->pluck('id')->toArray();
+                $meals = MealToAllergy::distinct()->whereNotIn('allergy_id', $userAllergies)->active()->pluck('meal_id')->toArray();
+                
+                $recommendations[] = [
+                    'user' => $user,
+                    'recommendations' => Meal::whereIn('id', $meals)->active()->get()
+                ];
+            }
+        }
+
+        return [
+            'status' => 'success',
+            'recommendations' => $recommendations
+        ];
+    }
 }
