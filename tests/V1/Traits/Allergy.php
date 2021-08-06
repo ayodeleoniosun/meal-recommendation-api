@@ -10,10 +10,10 @@ trait Allergy
 {
     use WithFaker;
 
-    public function pickAllergy()
+    public function pickAllergy($token = null)
     {
         $allergies = factory(AllergyModel::class, 3)->create();
         $allergies = $allergies->pluck('id')->toArray();
-        return $this->req()->json('POST', $this->route("/users/allergies"), ["allergies" => $allergies]);
+        return $this->req($token)->json('POST', $this->route("/users/allergies"), ["allergies" => $allergies]);
     }
 }

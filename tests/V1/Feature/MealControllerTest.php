@@ -117,4 +117,30 @@ class MealControllerTest extends TestCase
             ]
         ]);
     }
+
+    public function testRecommendMealForMultipleUsers()
+    {
+        $users = factory(User::class, 3)->create();
+        $users = $users->pluck('id')->toArray();
+        
+        foreach ($users as $user) {
+            $token = User::find($user)->bearer_token;
+            $this->pickAllergy($token);
+        }
+        
+        $response = $this->req($token)->json('POST', $this->route("/meals/recommendations"), ["users" => $users]);
+        $response->assertStatus(200);
+        $this->assertEquals($response->getData()->status, 'success');
+        $response->assertJsonStructure([
+            'status',
+            'recommendations' => [
+                '*' => [
+                    'user' => ['id', 'first_name', 'last_name', 'email_address', 'phone_number', 'created_at', 'updated_at', 'active_status'],
+                    'recommendations' => [
+                        '*' => ['id', 'name', 'created_at', 'updated_at', 'active_status']
+                    ]
+                ]
+            ]
+        ]);
+    }
 }
