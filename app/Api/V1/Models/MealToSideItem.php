@@ -10,4 +10,9 @@ class MealToSideItem extends Model
     use HasFactory;
 
     protected $table = 'meal_to_side_items';
+
+    protected static function booted()
+    {
+        static::addGlobalScope(new ActiveScope);
+    }
 }
