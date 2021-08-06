@@ -1,0 +1,492 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Edenlife Meal Recommendation System API V1 Documentation",
+        "description": "Edenlife Meal Recommendation System API V1 Documentation",
+        "contact": {
+            "email": "ayodeleoniosun63@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000/api/v1",
+            "description": "Demo API Server"
+        }
+    ],
+    "paths": {
+        "/users/my-allergies": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Show user allergies",
+                "description": "Show user allergies",
+                "operationId": "d8fb89fd0bef99198fe37b9a0c1da105",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "description": "The response code",
+                                            "type": "string"
+                                        },
+                                        "allergies": {
+                                            "description": "The response data",
+                                            "type": "array",
+                                            "items": {}
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "401": {
+                        "description": "Unauthorized access"
+                    },
+                    "404": {
+                        "description": "Resource not found"
+                    },
+                    "500": {
+                        "description": "An error occured."
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/users/allergies": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Pick one or more allergies",
+                "description": "Pick one or more allergies",
+                "operationId": "75764ac2f0420e3710dbefb98bc1f4fa",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "allergies"
+                                ],
+                                "properties": {
+                                    "allergies": {
+                                        "type": "array",
+                                        "items": {}
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful registration",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "description": "The response code",
+                                            "type": "string"
+                                        },
+                                        "allergies": {
+                                            "description": "data",
+                                            "type": "array",
+                                            "items": {}
+                                        },
+                                        "message": {
+                                            "description": "The response message",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "description": "The response code",
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "description": "The response message",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "500": {
+                        "description": "An error occured"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/meals": {
+            "get": {
+                "tags": [
+                    "Meals"
+                ],
+                "summary": "Get list of meals",
+                "description": "Returns list of meals",
+                "operationId": "4d828e07be520ce5d5db07095f061c20",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "description": "The response code",
+                                            "type": "string"
+                                        },
+                                        "meals": {
+                                            "description": "The response data",
+                                            "type": "array",
+                                            "items": {}
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource not found"
+                    },
+                    "500": {
+                        "description": "An error occured."
+                    }
+                }
+            }
+        },
+        "/meals/{id}": {
+            "get": {
+                "tags": [
+                    "Meals"
+                ],
+                "summary": "Show meals and their respective allergies, main item and side items",
+                "description": "Show meals and their respective allergies, main item and side items",
+                "operationId": "2313b3b82528f01bc79c993587a0f2ac",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "meal id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "description": "The response code",
+                                            "type": "string"
+                                        },
+                                        "meal": {
+                                            "description": "The response data",
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource not found"
+                    },
+                    "500": {
+                        "description": "An error occured."
+                    }
+                }
+            }
+        },
+        "/users/meals/recommendations": {
+            "get": {
+                "tags": [
+                    "Meals"
+                ],
+                "summary": "Show logged in user meal recommendations based on his allergy",
+                "description": "Show logged in user meal recommendations based on his allergy",
+                "operationId": "fec6a3228e7bd26f8ae81dbfac5b17db",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "description": "The response code",
+                                            "type": "string"
+                                        },
+                                        "recommendations": {
+                                            "description": "The response data",
+                                            "type": "array",
+                                            "items": {}
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "401": {
+                        "description": "Unauthorized access"
+                    },
+                    "404": {
+                        "description": "Resource not found"
+                    },
+                    "500": {
+                        "description": "An error occured."
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/accounts/register": {
+            "post": {
+                "tags": [
+                    "Accounts"
+                ],
+                "summary": "Sign up a new account",
+                "description": "Sign up a new account",
+                "operationId": "29a92b4bc6a788f4c3b091747e71955f",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "first_name",
+                                    "last_name",
+                                    "email_address",
+                                    "phone_number",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "first_name": {
+                                        "type": "string"
+                                    },
+                                    "last_name": {
+                                        "type": "string"
+                                    },
+                                    "email_address": {
+                                        "type": "string"
+                                    },
+                                    "phone_number": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful registration",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "description": "The response code",
+                                            "type": "string"
+                                        },
+                                        "user": {
+                                            "description": "data",
+                                            "type": "array",
+                                            "items": {}
+                                        },
+                                        "message": {
+                                            "description": "The response message",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "description": "The response code",
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "description": "The response message",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "500": {
+                        "description": "An error occured"
+                    }
+                }
+            }
+        },
+        "/accounts/login": {
+            "post": {
+                "tags": [
+                    "Accounts"
+                ],
+                "summary": "Login to an existing account",
+                "description": "Login to an existing account",
+                "operationId": "62c068b998dd97929de262df320a4fbb",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email_address",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email_address": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful login",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "description": "The response code",
+                                            "type": "string"
+                                        },
+                                        "user": {
+                                            "description": "data",
+                                            "type": "array",
+                                            "items": {}
+                                        },
+                                        "message": {
+                                            "description": "The response message",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "description": "The response code",
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "description": "The response message",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "500": {
+                        "description": "An error occured"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearer_token": {
+                "type": "http",
+                "in": "header",
+                "scheme": "bearer"
+            }
+        }
+    }
+}

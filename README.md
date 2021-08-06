@@ -61,7 +61,14 @@ php artisan serve
 You can now access the api at http://localhost:8000/api/v1
 ## Documentation
 
-After starting the project in development mode, the API documentation is available [here](https://github.com/ayodeleoniosun/meal-recommendation-api/blob/develop/app/Api/V1/Meal%20Recommendation%20API.postman_collection.json).
+Publish the swagger documentation by running this
+```bash
+php artisan vendor:publish --provider "L5Swagger\L5SwaggerServiceProvider"
+```
+
+After starting the project in development mode, you can import the postman collection [here](http://github.com/ayodeleoniosun/meal-recommendation-api/blob/develop/app/Api/V1/Meal%20Recommendation%20API.postman_collection.json).
+
+After starting the project in development mode, the API documentation is available [here](http://localhost:8000/api/documentation).
 ## Testing
 #### Run test
 
