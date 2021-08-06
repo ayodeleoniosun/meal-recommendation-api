@@ -93,7 +93,7 @@ class UserControllerTest extends TestCase
     public function testRegistrationSuccessful()
     {
         $response = $this->registerUser();
-        $response->assertStatus(200);
+        $response->assertStatus(201);
         $response->assertJsonStructure(
             [
                 'status',

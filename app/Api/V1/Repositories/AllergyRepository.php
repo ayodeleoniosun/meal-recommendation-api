@@ -50,9 +50,12 @@ class AllergyRepository implements AllergyInterface
                 'allergy_id' => $allergy
             ]);
         }
-
+        
+        $allergies = $user->load('allergies');
+        
         return [
             'status' => 'success',
+            'allergies' => $allergies->allergies,
             'message' => count($allAllergies).' allergies successfully picked'
         ];
     }

@@ -3,6 +3,7 @@
 namespace Tests\V1\Feature;
 
 use App\Api\V1\Models\Allergy;
+use App\Api\V1\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\V1\TestCase;
 use Tests\V1\Traits\Allergy as TraitsAllergy;
@@ -27,7 +28,26 @@ class AllergyControllerTest extends TestCase
     public function testPickAllergySuccessful()
     {
         $response = $this->pickAllergy();
+        $response->assertStatus(201);
+        $response->assertJsonStructure([
+            'status',
+            'allergies',
+            'message'
+        ]);
+    }
+
+    public function testShowUserAllergies()
+    {
+        $allergies = $this->pickAllergy();
+        $user_id = $allergies->getData()->allergies[0]->pivot->user_id;
+        $token = User::find($user_id)->bearer_token;
+        
+        $response = $this->req($token)->json('GET', $this->route("/users/my-allergies"));
         $response->assertStatus(200);
         $this->assertEquals($response->getData()->status, 'success');
+        $response->assertJsonStructure([
+            'status',
+            'allergies'
+        ]);
     }
 }

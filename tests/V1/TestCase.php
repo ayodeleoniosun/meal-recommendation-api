@@ -25,14 +25,14 @@ abstract class TestCase extends BaseTestCase
         return sprintf('%s%s', $this->baseURL, $route);
     }
 
-    public function req()
+    public function req($token = null)
     {
         $this->user = $this->registerUser();
-        $token = $this->user->getData()->user->bearer_token;
+        $userToken = $token ?? $this->user->getData()->user->bearer_token;
         
         return $this->withHeaders(
             [
-                'Authorization' => 'Bearer '.$token,
+                'Authorization' => 'Bearer '.$userToken,
                 'Accept' => 'application/json'
             ]
         );
