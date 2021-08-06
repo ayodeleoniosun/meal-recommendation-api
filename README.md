@@ -1,5 +1,4 @@
-# Url Shortener API
-
+# Meal Recommendation System API
 ## Description
 
 This repository implemented a meal recommendation system REST API with the following features:
@@ -62,7 +61,7 @@ php artisan serve
 You can now access the api at http://localhost:8000/api/v1
 ## Documentation
 
-After starting the project in development mode, the API documentation is available [here](https://localhost:000/api/docs/).
+After starting the project in development mode, the API documentation is available [here](https://github.com/ayodeleoniosun/meal-recommendation-api/blob/develop/app/Api/V1/Meal%20Recommendation%20API.postman_collection.json).
 ## Testing
 #### Run test
 
