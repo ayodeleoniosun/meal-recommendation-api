@@ -26,5 +26,9 @@ Route::group(
             Route::get('/my-allergies', 'AllergyController@myAllergies')->name('users.allergies.index');
             Route::post('/allergies', 'AllergyController@pickAllergies')->name('users.allergies.pick');
         });
+
+        Route::group(['prefix' => 'meals'], function () {
+            Route::get('/', 'MealController@index')->name('meals.index');
+        });
     }
 );

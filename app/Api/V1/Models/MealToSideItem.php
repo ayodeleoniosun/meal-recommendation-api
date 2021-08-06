@@ -12,8 +12,8 @@ class MealToSideItem extends Model
 
     protected $table = 'meal_to_side_items';
 
-    protected static function booted()
+    public function scopeActive($query)
     {
-        static::addGlobalScope(new ActiveScope);
+        return $query->where('active_status', ActiveStatus::ACTIVE);
     }
 }

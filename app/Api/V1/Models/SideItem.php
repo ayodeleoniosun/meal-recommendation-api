@@ -13,9 +13,9 @@ class SideItem extends Model
     protected $table = 'side_items';
     protected $fillable = ['name'];
 
-    protected static function booted()
+    public function scopeActive($query)
     {
-        static::addGlobalScope(new ActiveScope);
+        return $query->where('active_status', ActiveStatus::ACTIVE);
     }
 
     public function meals()

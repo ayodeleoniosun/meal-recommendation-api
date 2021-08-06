@@ -3,11 +3,10 @@
 namespace App\Api\V1\Resources;
 
 use App\Api\V1\Models\ActiveStatus;
-use App\Api\V1\Models\Allergy;
 use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserAllergyResource extends JsonResource
+class MealResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -20,10 +19,12 @@ class UserAllergyResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'main_item' => new MainItemResource($this->mainItem),
+            'side_items' => SideItemResource::collection($this->sideItems),
+            'allergies' => AllergyResource::collection($this->allergies),
             'created_at' => Carbon::parse($this->created_at)->format('F jS, Y'),
             'updated_at' => Carbon::parse($this->created_at)->format('F jS, Y'),
-            'active_status' => ActiveStatus::getStatusName($this->active_status),
-            'meals' => Allergy::find($this->id)->meals
+            'active_status' => ActiveStatus::getStatusName($this->active_status)
         ];
     }
 }
