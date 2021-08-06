@@ -28,8 +28,9 @@ git clone https://github.com/ayodeleoniosun/meal-recommendation-api.git
 ```
 #### Step 2: Switch to repo folder
 
+```bash
 cd meal-recommendation-api
-
+```
 #### Step 3: Install all dependencies using composer
 
 ```bash
@@ -68,7 +69,7 @@ php artisan vendor:publish --provider "L5Swagger\L5SwaggerServiceProvider"
 
 After starting the project in development mode, you can import the postman collection [here](http://github.com/ayodeleoniosun/meal-recommendation-api/blob/develop/app/Api/V1/Meal%20Recommendation%20API.postman_collection.json).
 
-After starting the project in development mode, the API documentation is available [here](http://localhost:8000/api/documentation).
+The API documentation is available [here](http://localhost:8000/api/documentation).
 ## Testing
 #### Run test
 
