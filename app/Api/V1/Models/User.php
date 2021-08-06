@@ -26,6 +26,11 @@ class User extends Authenticable
         'bearer_token'
     ];
 
+    public function scopeActive($query)
+    {
+        return $query->where('active_status', ActiveStatus::ACTIVE);
+    }
+    
     public function allergies()
     {
         return $this->belongsToMany(Allergy::class, 'user_to_allergies');

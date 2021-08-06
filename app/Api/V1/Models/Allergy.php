@@ -20,12 +20,10 @@ class Allergy extends Model
     public function meals()
     {
         return $this->belongsToMany(Meal::class, 'meal_to_allergies');
-        ;
     }
 
     public function users()
     {
         return $this->belongsToMany(User::class, 'user_to_allergies');
-        ;
     }
 }

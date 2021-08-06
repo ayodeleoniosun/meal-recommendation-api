@@ -27,10 +27,7 @@ class ApiUtility
 
     public static function authUser($token)
     {
-        $user = User::where([
-            'bearer_token' => $token,
-            'active_status' => ActiveStatus::ACTIVE
-        ])->first();
+        $user = User::where('bearer_token', $token)->active()->first();
         
         if (!$user) {
             throw new CustomApiErrorResponseHandler("Unauthorized access.", 401);
