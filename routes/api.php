@@ -21,5 +21,9 @@ Route::group(
             Route::post('/register', 'UserController@register')->name('accounts.register');
             Route::post('/login', 'UserController@login')->name('accounts.login');
         });
+
+        Route::group(['prefix' => 'users', 'middleware' => ['v1.authenticate.user']], function () {
+            Route::post('/allergies', 'AllergyController@pickAllergies')->name('users.allergies.pick');
+        });
     }
 );

@@ -11,9 +11,5 @@ class UserToAllergy extends Model
     use HasFactory;
 
     protected $table = 'user_to_allergies';
-
-    protected static function booted()
-    {
-        static::addGlobalScope(new ActiveScope);
-    }
+    protected $fillable = ['user_id', 'allergy_id'];
 }

@@ -40,8 +40,7 @@ class UserRepository implements UserInterface
 
         if (!Auth::attempt([
             'email_address' => $data->email_address,
-            'password' => $data->password,
-            'active_status' => ActiveStatus::ACTIVE
+            'password' => $data->password
         ])) {
             throw new CustomApiErrorResponseHandler("Incorrect login credentials. Try again.");
         }

@@ -2,7 +2,6 @@
 
 namespace App\Api\V1\Models;
 
-use App\Api\V1\Scopes\ActiveScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,18 +12,20 @@ class Allergy extends Model
     protected $table = 'allergies';
     protected $fillable = ['name'];
 
-    protected static function booted()
+    public function scopeActive($query)
     {
-        static::addGlobalScope(new ActiveScope);
+        return $query->where('active_status', ActiveStatus::ACTIVE);
     }
 
     public function meals()
     {
         return $this->belongsToMany(Meal::class, 'meal_to_allergies');
+        ;
     }
 
     public function users()
     {
         return $this->belongsToMany(User::class, 'user_to_allergies');
+        ;
     }
 }

@@ -17,7 +17,6 @@ class Meal extends Model
     {
         static::addGlobalScope(new ActiveScope);
     }
-
     
     public function mainItem()
     {
