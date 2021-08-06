@@ -30,7 +30,9 @@ class MealSeeder extends Seeder
                 factory(MainItem::class, 1)->create([
                     'meal_id' => $meal->id
                 ]);
-
+                
+                $sideItems = $sideItems->random(3);
+                    
                 foreach ($sideItems as $side_item) {
                     factory(MealToSideItem::class, $count)->create([
                         'meal_id' => $meal->id,
@@ -38,12 +40,12 @@ class MealSeeder extends Seeder
                     ]);
                 }
 
-                foreach ($allergies as $allergy) {
-                    factory(MealToAllergy::class, $count)->create([
-                        'meal_id' => $meal->id,
-                        'allergy_id' => $allergy->id
-                    ]);
-                }
+                $allergy = $allergies->random(1)->first();
+                
+                factory(MealToAllergy::class, $count)->create([
+                    'meal_id' => $meal->id,
+                    'allergy_id' => $allergy->id
+                ]);
             }
         });
     }

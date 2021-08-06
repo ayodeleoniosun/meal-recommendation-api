@@ -6,6 +6,8 @@ use App\Exceptions\CustomApiErrorResponseHandler;
 use App\Api\V1\Models\Meal;
 use App\Api\V1\Interfaces\MealInterface;
 use App\Api\V1\Models\ActiveStatus;
+use App\Api\V1\Models\MealToAllergy;
+use App\Api\V1\Models\User;
 use App\Api\V1\Resources\MealResource;
 
 class MealRepository implements MealInterface
@@ -36,6 +38,21 @@ class MealRepository implements MealInterface
         return [
             'status' => 'success',
             'meal' => new MealResource($meal)
+        ];
+    }
+
+    public function userRecommendations(array $data): array
+    {
+        $data = (object) $data;
+        $user = User::find($data->auth_user->id);
+        $userAllergies = $user->allergies->pluck('id')->toArray();
+        
+        $meals = MealToAllergy::distinct()->whereNotIn('allergy_id', $userAllergies)->active()->pluck('meal_id')->toArray();
+        $recommendations = Meal::whereIn('id', $meals)->active()->get();
+
+        return [
+            'status' => 'success',
+            'recommendations' => MealResource::collection($recommendations)
         ];
     }
 }

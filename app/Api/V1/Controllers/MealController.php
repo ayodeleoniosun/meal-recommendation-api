@@ -20,9 +20,15 @@ class MealController extends Controller
         return response()->json($response, 200);
     }
 
-    public function show($id)
+    public function show(int $id)
     {
         $response = $this->mealInterface->show($id);
+        return response()->json($response, 200);
+    }
+
+    public function userRecommendations(Request $request)
+    {
+        $response = $this->mealInterface->userRecommendations($request->all());
         return response()->json($response, 200);
     }
 }
