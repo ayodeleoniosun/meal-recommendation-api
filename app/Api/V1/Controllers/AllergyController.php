@@ -17,6 +17,12 @@ class AllergyController extends Controller
         $this->allergyInterface = $allergyInterface;
     }
 
+    public function myAllergies(Request $request)
+    {
+        $response = $this->allergyInterface->myAllergies($request->all());
+        return response()->json($response, 200);
+    }
+
     public function pickAllergies(Request $request)
     {
         $allergyRequest  = new PickAllergyRequest();

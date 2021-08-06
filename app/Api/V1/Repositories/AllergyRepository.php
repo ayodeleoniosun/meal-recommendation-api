@@ -9,10 +9,27 @@ use App\Api\V1\Interfaces\AllergyInterface;
 use App\Api\V1\Models\ActiveStatus;
 use App\Api\V1\Models\User;
 use App\Api\V1\Models\UserToAllergy;
+use App\Api\V1\Resources\UserAllergyResource;
 use Illuminate\Support\Facades\Auth;
 
 class AllergyRepository implements AllergyInterface
 {
+    public function myAllergies(array $data): array
+    {
+        $data = (object) $data;
+        $user = User::find($data->auth_user->id);
+        $allergies = $user->allergies;
+        
+        if ($allergies->count() == 0) {
+            throw new CustomApiErrorResponseHandler("You haven't picked any allergy");
+        }
+        
+        return [
+            'status' => 'success',
+            'allergies' => UserAllergyResource::collection($allergies)
+        ];
+    }
+
     public function pickAllergies(array $data): array
     {
         $data = (object) $data;

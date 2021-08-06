@@ -13,9 +13,9 @@ class Meal extends Model
     protected $table = 'meals';
     protected $fillable = ['name'];
 
-    protected static function booted()
+    public function scopeActive($query)
     {
-        static::addGlobalScope(new ActiveScope);
+        return $query->where('active_status', ActiveStatus::ACTIVE);
     }
     
     public function mainItem()

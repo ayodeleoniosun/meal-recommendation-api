@@ -23,6 +23,7 @@ Route::group(
         });
 
         Route::group(['prefix' => 'users', 'middleware' => ['v1.authenticate.user']], function () {
+            Route::get('/my-allergies', 'AllergyController@myAllergies')->name('users.allergies.index');
             Route::post('/allergies', 'AllergyController@pickAllergies')->name('users.allergies.pick');
         });
     }
