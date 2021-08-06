@@ -38,26 +38,22 @@ class AllergyRepository implements AllergyInterface
             throw new CustomApiErrorResponseHandler("Allergies do not exist");
         }
 
-        $userAllergies = collect($user->allergies->pluck('id')->toArray());
-        $allAllergies = count($allergies) > count($userAllergies) ? collect($allergies)->diff($userAllergies) :
-            collect($userAllergies)->diff($allergies);
-
-        if (count($allAllergies) == 0) {
-            throw new CustomApiErrorResponseHandler("No new allergy picked");
-        }
-
-        $userToAllergies = UserToAllergy::where('user_id', $data->auth_user->id)
-            ->whereIn('allergy_id', $allAllergies)->pluck('allergy_id')->toArray();
+        $userToAllergies = UserToAllergy::where('user_id', $user->id)
+            ->whereIn('allergy_id', $allergies)->pluck('allergy_id')->toArray();
         
         $newUserAllergies = [];
 
-        foreach ($allAllergies as $allergy) {
+        foreach ($allergies as $allergy) {
             if (!in_array($allergy, $userToAllergies)) {
                 $newUserAllergies[] = [
-                    'user_id' => $data->auth_user->id,
+                    'user_id' => $user->id,
                     'allergy_id' => $allergy
                 ];
             }
+        }
+
+        if (count($newUserAllergies) == 0) {
+            throw new CustomApiErrorResponseHandler("No new allergy picked");
         }
 
         UserToAllergy::insert($newUserAllergies);

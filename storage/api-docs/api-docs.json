@@ -15,7 +15,7 @@
     "servers": [
         {
             "url": "http://localhost:8000/api/v1",
-            "description": "Test server"
+            "description": "Test Server"
         }
     ],
     "paths": {
