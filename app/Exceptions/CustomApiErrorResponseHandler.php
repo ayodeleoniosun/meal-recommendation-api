@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Exceptions;
-
-use App\Modules\Api\V1\Controllers\Controller;
 use Exception;
 
 class CustomApiErrorResponseHandler extends Exception

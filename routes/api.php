@@ -13,3 +13,12 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+Route::group(
+    ['prefix' => 'v1', 'namespace' => 'App\Api\V1\Controllers'],
+    function () {
+        Route::group(['prefix' => 'accounts'], function () {
+            Route::post('/register', 'UserController@register')->name('accounts.register');
+        });
+    }
+);

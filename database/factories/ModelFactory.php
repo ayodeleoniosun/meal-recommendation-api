@@ -23,6 +23,7 @@ use App\Api\V1\Models\MealToSideItem;
 use App\Api\V1\Models\SideItem;
 use App\Api\V1\Models\User;
 use App\Api\V1\Models\UserToAllergy;
+use App\Api\ApiUtility;
 
 $factory->define(
     Allergy::class,
@@ -58,9 +59,9 @@ $factory->define(
             'first_name' => $faker->firstName,
             'last_name' => $faker->lastName,
             'phone_number' => '080'.rand(111111111, 999999999),
-            'email_address' => $faker->email,
+            'email_address' => $faker->unique()->safeEmail,
             'password' => bcrypt('secret'),
-            'bearer_token' => base64_encode(uniqid()),
+            'bearer_token' => ApiUtility::generateBearerToken()
         ];
      }
  );
