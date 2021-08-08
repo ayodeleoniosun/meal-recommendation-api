@@ -23,7 +23,8 @@ class PickAllergyRequest extends FormRequest
     public function rules()
     {
         return [
-            'allergies' => 'required|array'
+            'allergies' => 'required|array',
+            'allergies.*' => 'exists:allergies,id'
         ];
     }
 
