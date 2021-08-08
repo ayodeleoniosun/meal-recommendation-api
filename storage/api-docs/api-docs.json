@@ -15,7 +15,7 @@
     "servers": [
         {
             "url": "https://ayodele-meals-recommendation.herokuapp.com/api/v1/",
-            "description": "Test Server"
+            "description": "Production Server"
         }
     ],
     "paths": {
