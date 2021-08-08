@@ -1,6 +1,6 @@
 <?php
 
-use App\Api\V1\Models\Allergy;
+use App\Http\Models\Allergy;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -18,9 +18,6 @@ class CreateAllergiesTable extends Migration
             $table->id();
             $table->string('name');
             $table->timestamps();
-            $table->unsignedBigInteger('active_status')->default(1);
-
-            $table->foreign('active_status')->references('id')->on('active_status')->onDelete('cascade');
         });
 
         $allergies = collect(['Nut Allergy', 'ShellFish Allergy', 'SeaFood Allergy']);

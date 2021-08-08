@@ -18,9 +18,7 @@ class CreateMealToAllergiesTable extends Migration
             $table->unsignedBigInteger('meal_id');
             $table->unsignedBigInteger('allergy_id');
             $table->timestamps();
-            $table->unsignedBigInteger('active_status')->default(1);
-
-            $table->foreign('active_status')->references('id')->on('active_status')->onDelete('cascade');
+            
             $table->foreign('meal_id')->references('id')->on('meals')->onDelete('cascade');
             $table->foreign('allergy_id')->references('id')->on('allergies')->onDelete('cascade');
         });
