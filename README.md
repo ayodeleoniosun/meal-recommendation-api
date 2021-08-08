@@ -71,9 +71,9 @@ php artisan vendor:publish --provider "L5Swagger\L5SwaggerServiceProvider"
 
 After starting the project in development mode, you can import the postman collection [here](https://github.com/ayodeleoniosun/meal-recommendation-api/blob/develop/app/Meal%20Recommendation%20API.postman_collection.json).
 
-The API documentation is available locally [here](http://localhost:8000/api/documentation).
+The API documentation is available locally [here](http://localhost:8000).
 
-The API documentation is available remotely [here](https://ayodele-meals-recommendation.herokuapp.com/api/documentation).
+The API documentation is available remotely [here](https://ayodele-meals-recommendation.herokuapp.com).
 ## Testing
 #### Run test
 
