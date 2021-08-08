@@ -32,7 +32,7 @@ class AllergyRepository implements AllergyInterface
         $data = (object) $data;
         $user = User::find($data->auth_user->id);
         
-        $allergies = Allergy::whereIn('id', $data->allergies)->active()->pluck('id')->toArray();
+        $allergies = Allergy::whereIn('id', $data->allergies)->pluck('id')->toArray();
         
         if (count($allergies) == 0) {
             throw new CustomApiErrorResponseHandler("Allergies do not exist");

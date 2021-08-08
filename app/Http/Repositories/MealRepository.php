@@ -15,7 +15,7 @@ class MealRepository implements MealInterface
     public function index(array $data): array
     {
         $data = (object) $data;
-        $meals = Meal::active()->get();
+        $meals = Meal::all();
         
         if ($meals->count() == 0) {
             throw new CustomApiErrorResponseHandler("No meals yet");
@@ -31,7 +31,7 @@ class MealRepository implements MealInterface
     {
         $meal = Meal::find($id);
         
-        if (!$meal || $meal->active_status != ActiveStatus::ACTIVE) {
+        if (!$meal) {
             throw new CustomApiErrorResponseHandler("Meal not found");
         }
         
@@ -47,8 +47,8 @@ class MealRepository implements MealInterface
         $user = User::find($data->auth_user->id);
         $userAllergies = $user->allergies->pluck('id')->toArray();
         
-        $meals = MealToAllergy::distinct()->whereNotIn('allergy_id', $userAllergies)->active()->pluck('meal_id')->toArray();
-        $recommendations = Meal::whereIn('id', $meals)->active()->get();
+        $meals = MealToAllergy::distinct()->whereNotIn('allergy_id', $userAllergies)->pluck('meal_id')->toArray();
+        $recommendations = Meal::whereIn('id', $meals)->get();
 
         return [
             'status' => 'success',
@@ -67,11 +67,11 @@ class MealRepository implements MealInterface
 
             if ($user) {
                 $userAllergies = $user->allergies->pluck('id')->toArray();
-                $meals = MealToAllergy::distinct()->whereNotIn('allergy_id', $userAllergies)->active()->pluck('meal_id')->toArray();
+                $meals = MealToAllergy::distinct()->whereNotIn('allergy_id', $userAllergies)->pluck('meal_id')->toArray();
                 
                 $recommendations[] = [
                     'user' => $user,
-                    'recommendations' => Meal::whereIn('id', $meals)->active()->get()
+                    'recommendations' => Meal::whereIn('id', $meals)->get()
                 ];
             }
         }
