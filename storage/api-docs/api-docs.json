@@ -19,14 +19,14 @@
         }
     ],
     "paths": {
-        "/users/my-allergies": {
+        "/allergies": {
             "get": {
                 "tags": [
-                    "Users"
+                    "Allergies"
                 ],
                 "summary": "Show user allergies",
                 "description": "Show user allergies",
-                "operationId": "d8fb89fd0bef99198fe37b9a0c1da105",
+                "operationId": "2af3efecc83cf8d76e4190037b935e41",
                 "responses": {
                     "200": {
                         "description": "Successful operation",
@@ -67,16 +67,14 @@
                         "bearer_token": []
                     }
                 ]
-            }
-        },
-        "/users/allergies": {
+            },
             "post": {
                 "tags": [
-                    "Users"
+                    "Allergies"
                 ],
                 "summary": "Pick one or more allergies",
                 "description": "Pick one or more allergies",
-                "operationId": "75764ac2f0420e3710dbefb98bc1f4fa",
+                "operationId": "7ef07e97ae74e065abdaf4b5e199d142",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -162,7 +160,7 @@
                 ],
                 "summary": "Get list of meals",
                 "description": "Returns list of meals",
-                "operationId": "4d828e07be520ce5d5db07095f061c20",
+                "operationId": "b59c41d713c10f8b0808eb43a10e9390",
                 "responses": {
                     "200": {
                         "description": "Successful operation",
@@ -202,9 +200,9 @@
                 "tags": [
                     "Meals"
                 ],
-                "summary": "Show meals and their respective allergies, main item and side items",
-                "description": "Show meals and their respective allergies, main item and side items",
-                "operationId": "2313b3b82528f01bc79c993587a0f2ac",
+                "summary": "Find meal and its respective allergies, main item and side items",
+                "description": "Find meal and its respective allergies, main item and side items",
+                "operationId": "0acc5fc98cc9a2c90e435e7b137c0b4d",
                 "parameters": [
                     {
                         "name": "id",
@@ -249,64 +247,14 @@
                 }
             }
         },
-        "/users/meals/recommendations": {
-            "get": {
-                "tags": [
-                    "Meals"
-                ],
-                "summary": "Show logged in user meal recommendations based on his allergy",
-                "description": "Show logged in user meal recommendations based on his allergy",
-                "operationId": "fec6a3228e7bd26f8ae81dbfac5b17db",
-                "responses": {
-                    "200": {
-                        "description": "Successful operation",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "status": {
-                                            "description": "The response code",
-                                            "type": "string"
-                                        },
-                                        "recommendations": {
-                                            "description": "The response data",
-                                            "type": "array",
-                                            "items": {}
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "401": {
-                        "description": "Unauthorized access"
-                    },
-                    "404": {
-                        "description": "Resource not found"
-                    },
-                    "500": {
-                        "description": "An error occured."
-                    }
-                },
-                "security": [
-                    {
-                        "bearer_token": []
-                    }
-                ]
-            }
-        },
         "/meals/recommendations": {
             "post": {
                 "tags": [
                     "Meals"
                 ],
-                "summary": "Show meals recommendations for multiple users",
-                "description": "Show meals recommendations for multiple users",
-                "operationId": "75ecae9a2d2a938884de0023b2288b68",
+                "summary": "Show meals recommendations for either single or multiple  users",
+                "description": "Show meals recommendations for either single or multiple  users",
+                "operationId": "3e132945aee65d7cf87b09549ba53d56",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -327,7 +275,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "successful registration",
+                        "description": "successful operation",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -376,14 +324,14 @@
                 }
             }
         },
-        "/accounts/register": {
+        "/users/register": {
             "post": {
                 "tags": [
-                    "Accounts"
+                    "Users"
                 ],
                 "summary": "Sign up a new account",
                 "description": "Sign up a new account",
-                "operationId": "29a92b4bc6a788f4c3b091747e71955f",
+                "operationId": "75ac4d6a6e8c8bdc865ea7806514679b",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -472,14 +420,14 @@
                 }
             }
         },
-        "/accounts/login": {
+        "/users/login": {
             "post": {
                 "tags": [
-                    "Accounts"
+                    "Users"
                 ],
                 "summary": "Login to an existing account",
                 "description": "Login to an existing account",
-                "operationId": "62c068b998dd97929de262df320a4fbb",
+                "operationId": "2bed00028ae8e20c4e21a4f7b8c6c281",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -554,6 +502,56 @@
                         "description": "An error occured"
                     }
                 }
+            }
+        },
+        "/users/meals/recommendations": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Show logged in user meal recommendations based on his allergy",
+                "description": "Show logged in user meal recommendations based on his allergy",
+                "operationId": "f9e6a6234d443254a203f2daa811394e",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "description": "The response code",
+                                            "type": "string"
+                                        },
+                                        "recommendations": {
+                                            "description": "The response data",
+                                            "type": "array",
+                                            "items": {}
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "401": {
+                        "description": "Unauthorized access"
+                    },
+                    "404": {
+                        "description": "Resource not found"
+                    },
+                    "500": {
+                        "description": "An error occured."
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
             }
         }
     },

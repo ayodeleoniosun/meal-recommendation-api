@@ -24,7 +24,7 @@ class UserController extends Controller
      *      path="/users/register",
      *      summary="Sign up a new account",
      *      description="Sign up a new account",
-     *      tags={"Accounts"},
+     *      tags={"Users"},
      *      @OA\RequestBody(
      *         @OA\JsonContent(
      *           type="object",
@@ -105,7 +105,7 @@ class UserController extends Controller
      *      path="/users/login",
      *      summary="Login to an existing account",
      *      description="Login to an existing account",
-     *      tags={"Accounts"},
+     *      tags={"Users"},
      *      @OA\RequestBody(
      *         @OA\JsonContent(
      *           type="object",
@@ -181,7 +181,7 @@ class UserController extends Controller
      *
      * @OA\Get(
      *      path="/users/meals/recommendations",
-     *      tags={"Meals"},
+     *      tags={"Users"},
      *      security={{"bearer_token":{}}},
      *      summary="Show logged in user meal recommendations based on his allergy",
      *      description="Show logged in user meal recommendations based on his allergy",
