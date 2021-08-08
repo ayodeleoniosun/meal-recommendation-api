@@ -103,7 +103,7 @@
 			]
 		},
 		{
-			"name": "Users",
+			"name": "Allergies",
 			"item": [
 				{
 					"name": "Pick Allergies",
@@ -117,7 +117,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer 4|OYKgzIgg3k8DR7fqvIAsQVKOsDDXecEcmkCzkess",
+								"value": "Bearer 15|O1bc82ce2MGd8E4RzHoAhdpYmooTOdssYV6yPrn1",
 								"type": "text"
 							},
 							{
@@ -128,7 +128,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"allergies\" : [1, 2, 3]\n}",
+							"raw": "{\n    \"allergies\" : [5,15]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -151,7 +151,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer 4|OYKgzIgg3k8DR7fqvIAsQVKOsDDXecEcmkCzkess",
+								"value": "Bearer 15|O1bc82ce2MGd8E4RzHoAhdpYmooTOdssYV6yPrn1",
 								"type": "text"
 							},
 							{
@@ -280,7 +280,7 @@
 	"variable": [
 		{
 			"key": "v1",
-			"value": "http://127.0.0.1:8000/api/v1"
+			"value": "https://ayodele-meals-recommendation.herokuapp.com/api/v1"
 		},
 		{
 			"key": "users",
