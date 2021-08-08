@@ -14,7 +14,7 @@
     },
     "servers": [
         {
-            "url": "http://localhost:8000/api/v1",
+            "url": "https://ayodele-meals-recommendation.herokuapp.com/api/v1/",
             "description": "Test Server"
         }
     ],
