@@ -69,7 +69,7 @@ Publish the swagger documentation by running this
 php artisan vendor:publish --provider "L5Swagger\L5SwaggerServiceProvider"
 ```
 
-After starting the project in development mode, you can import the postman collection [here](http://github.com/ayodeleoniosun/meal-recommendation-api/blob/develop/app/Api/V1/Meal%20Recommendation%20API.postman_collection.json).
+After starting the project in development mode, you can import the postman collection [here](https://github.com/ayodeleoniosun/meal-recommendation-api/blob/develop/app/Meal%20Recommendation%20API.postman_collection.json).
 
 The API documentation is available locally [here](http://localhost:8000/api/documentation).
 
@@ -78,5 +78,5 @@ The API documentation is available remotely [here](https://ayodele-meals-recomme
 #### Run test
 
 ```bash
-vendor/bin/phpunit tests/v1/Feature
+vendor/bin/phpunit tests/Feature
 ```
