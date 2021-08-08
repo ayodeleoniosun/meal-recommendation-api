@@ -6,16 +6,27 @@
 	},
 	"item": [
 		{
-			"name": "Accounts",
+			"name": "Users",
 			"item": [
 				{
 					"name": "Register",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email_address\" : \"ayodeleoniosun@gmail.com\",\n    \"first_name\" : \"ayodele\",\n    \"last_name\" : \"oniosun\",\n    \"password\" : \"123456\",\n    \"phone_number\" : \"08132016744\"\n}",
+							"raw": "{\n    \"email_address\" : \"ayodele@gmail.com\",\n    \"first_name\" : \"ayodele\",\n    \"last_name\" : \"oniosun\",\n    \"password\" : \"123456\",\n    \"phone_number\" : \"292160000744\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -23,9 +34,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{accounts}}/register",
+							"raw": "{{users}}/register",
 							"host": [
-								"{{accounts}}"
+								"{{users}}"
 							],
 							"path": [
 								"register"
@@ -41,7 +52,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email_address\" : \"ayodeleoniosun@gmail.com\",\n    \"password\" : \"123456\"\n}",
+							"raw": "{\n    \"email_address\" : \"ayodele@gmail.com\",\n    \"password\" : \"123456\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -49,72 +60,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{accounts}}/login",
+							"raw": "{{users}}/login",
 							"host": [
-								"{{accounts}}"
+								"{{users}}"
 							],
 							"path": [
 								"login"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Users",
-			"item": [
-				{
-					"name": "Pick Allergies",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer f74df8ad94d9318824011d633df7962962a364d93e89e51b9bd91b7cae1673c3",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"allergies\" : [1, 3, 2]\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{users}}/allergies",
-							"host": [
-								"{{users}}"
-							],
-							"path": [
-								"allergies"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "My Allergies",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer f74df8ad94d9318824011d633df7962962a364d93e89e51b9bd91b7cae1673c3",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{users}}/my-allergies",
-							"host": [
-								"{{users}}"
-							],
-							"path": [
-								"my-allergies"
 							]
 						}
 					},
@@ -127,7 +78,12 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer 44c7f2f6d964c2dbb25f2e348b3ad7ba428c349b10d3b2f65f3949fac5698291",
+								"value": "Bearer 4|OYKgzIgg3k8DR7fqvIAsQVKOsDDXecEcmkCzkess",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
 								"type": "text"
 							}
 						],
@@ -139,6 +95,75 @@
 							"path": [
 								"meals",
 								"recommendations"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Pick Allergies",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer 4|OYKgzIgg3k8DR7fqvIAsQVKOsDDXecEcmkCzkess",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"allergies\" : [1, 2, 3]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{allergies}}",
+							"host": [
+								"{{allergies}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "My Allergies",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer 4|OYKgzIgg3k8DR7fqvIAsQVKOsDDXecEcmkCzkess",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{allergies}}",
+							"host": [
+								"{{allergies}}"
 							]
 						}
 					},
@@ -194,12 +219,17 @@
 				},
 				{
 					"name": "Recommend Meals for Users",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
 					"request": {
 						"method": "POST",
 						"header": [
 							{
-								"key": "",
-								"value": "",
+								"key": "Accept",
+								"value": "application/json",
 								"type": "text"
 							}
 						],
@@ -253,12 +283,12 @@
 			"value": "http://127.0.0.1:8000/api/v1"
 		},
 		{
-			"key": "accounts",
-			"value": "{{v1}}/accounts"
-		},
-		{
 			"key": "users",
 			"value": "{{v1}}/users"
+		},
+		{
+			"key": "allergies",
+			"value": "{{v1}}/allergies"
 		},
 		{
 			"key": "meals",

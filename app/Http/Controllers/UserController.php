@@ -181,7 +181,7 @@ class UserController extends Controller
      *
      * @OA\Get(
      *      path="/users/meals/recommendations",
-     *      tags={"Meals"},
+     *      tags={"Users"},
      *      security={{"bearer_token":{}}},
      *      summary="Show logged in user meal recommendations based on his allergy",
      *      description="Show logged in user meal recommendations based on his allergy",
