@@ -20,7 +20,6 @@ class CreateUsersTable extends Migration
             $table->string('email_address')->unique();
             $table->string('phone_number');
             $table->string('password');
-            $table->string('bearer_token');
             $table->timestamps();
             $table->softDeletes();
         });

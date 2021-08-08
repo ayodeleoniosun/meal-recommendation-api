@@ -8,10 +8,10 @@ use App\Http\Models\User;
 use App\Http\Resources\UserAllergyResource;
 class AllergyRepository implements AllergyInterface
 {
-    public function index(array $data): array
+    public function index(array $data, int $userId): array
     {
         $data = (object) $data;
-        $user = User::find($data->auth_user->id);
+        $user = User::find($userId);
         $allergies = $user->allergies;
         
         if ($allergies->count() == 0) {
@@ -24,10 +24,10 @@ class AllergyRepository implements AllergyInterface
         ];
     }
 
-    public function store(array $data): array
+    public function store(array $data, int $userId): array
     {
         $data = (object) $data;
-        $user = User::find($data->auth_user->id);
+        $user = User::find($userId);
         $allergies = array_merge($user->allergies->pluck('id')->toArray(), $data->allergies);
         $sync = $user->allergies()->sync($allergies);
         $countSynced = count($sync['attached']);

@@ -53,7 +53,7 @@ class AllergyController extends Controller
 
     public function index(Request $request)
     {
-        $response = $this->allergyInterface->index($request->all());
+        $response = $this->allergyInterface->index($request->all(), $request->user()->id);
         return response()->json($response, 200);
     }
 
@@ -136,7 +136,7 @@ class AllergyController extends Controller
 
     public function store(PickAllergyRequest $request)
     {        
-        $response = $this->allergyInterface->store($request->all());
+        $response = $this->allergyInterface->store($request->all(), $request->user()->id);
         return response()->json($response, 201);
     }
 }

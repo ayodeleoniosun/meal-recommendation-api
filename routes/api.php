@@ -21,7 +21,7 @@ Route::group(
             Route::post('/login', 'UserController@login')->name('accounts.login');
         });
 
-        Route::group(['prefix' => 'allergies', 'middleware' => ['v1.authenticate.user']], function () {
+        Route::group(['prefix' => 'allergies', 'middleware' => ['auth:sanctum']], function () {
             Route::get('/', 'AllergyController@index')->name('allergies.index');
             Route::post('/', 'AllergyController@store')->name('allergies.store');
         });

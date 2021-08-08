@@ -23,9 +23,10 @@ class UserRepository implements UserInterface
             'last_name' => strtolower($data['last_name']),
             'phone_number' => $data['phone_number'],
             'email_address' => strtolower($data['email_address']),
-            'bearer_token' => Helper::generateBearerToken(),
             'password' => bcrypt($data['password'])
         ]);
+
+        $token = $user->createToken('auth_token')->plainTextToken;
         
         return [
             'status' => 'success',
@@ -45,11 +46,12 @@ class UserRepository implements UserInterface
             throw new CustomApiErrorResponseHandler("Incorrect login credentials. Try again.");
         }
 
-        $user = auth()->user();
-        
+        $user = User::where('email_address', $data->email_address)->firstOrFail();
+        $token = $user->createToken('auth_token')->plainTextToken;
+
         return [
             'status' => 'success',
-            'user' => $user,
+            'token' => $token,
             'message' => 'Login successful'
         ];
     }
