@@ -5,9 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Interfaces\AllergyInterface;
 use Illuminate\Http\Request;
 use App\Http\Requests\PickAllergyRequest;
-use App\Exceptions\CustomApiErrorResponseHandler;
-use Illuminate\Support\Facades\Validator;
-
 class AllergyController extends Controller
 {
     protected $allergyInterface;
@@ -137,17 +134,9 @@ class AllergyController extends Controller
      *
      */
 
-    public function store(Request $request)
-    {
-        $allergyRequest  = new PickAllergyRequest();
-        $validator = Validator::make($request->all(), $allergyRequest->rules(), $allergyRequest->messages());
-
-        if ($validator->fails()) {
-            throw new CustomApiErrorResponseHandler($validator->errors()->first());
-        }
-        
-    $response = $this->allergyInterface->store($request->all());
-    
+    public function store(PickAllergyRequest $request)
+    {        
+        $response = $this->allergyInterface->store($request->all());
         return response()->json($response, 201);
     }
 }

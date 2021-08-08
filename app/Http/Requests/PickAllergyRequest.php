@@ -2,9 +2,8 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Http\Request;
-
-class PickAllergyRequest extends Request
+use Illuminate\Foundation\Http\FormRequest;
+class PickAllergyRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

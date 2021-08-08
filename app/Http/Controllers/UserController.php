@@ -5,9 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Interfaces\UserInterface;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRegistrationRequest;
-use App\Exceptions\CustomApiErrorResponseHandler;
-use Illuminate\Support\Facades\Validator;
-
 class UserController extends Controller
 {
     protected $userInterface;
@@ -92,15 +89,8 @@ class UserController extends Controller
      *
      */
 
-    public function register(Request $request)
+    public function register(UserRegistrationRequest $request)
     {
-        $userRegistrationRequest  = new UserRegistrationRequest();
-        $validator = Validator::make($request->all(), $userRegistrationRequest->rules(), $userRegistrationRequest->messages());
-
-        if ($validator->fails()) {
-            throw new CustomApiErrorResponseHandler($validator->errors()->first());
-        }
-        
         $response = $this->userInterface->register($request->all());
         return response()->json($response, 201);
     }

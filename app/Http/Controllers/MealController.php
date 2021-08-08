@@ -4,10 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\MealRecommendationRequest;
 use App\Http\Interfaces\MealInterface;
-use App\Exceptions\CustomApiErrorResponseHandler;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-
 class MealController extends Controller
 {
     protected $mealInterface;
@@ -230,15 +227,8 @@ class MealController extends Controller
      */
 
 
-    public function recommendations(Request $request)
+    public function recommendations(MealRecommendationRequest $request)
     {
-        $recommendationRequest  = new MealRecommendationRequest();
-        $validator = Validator::make($request->all(), $recommendationRequest->rules(), $recommendationRequest->messages());
-
-        if ($validator->fails()) {
-            throw new CustomApiErrorResponseHandler($validator->errors()->first());
-        }
-
         $response = $this->mealInterface->recommendations($request->all());
         return response()->json($response, 200);
     }
