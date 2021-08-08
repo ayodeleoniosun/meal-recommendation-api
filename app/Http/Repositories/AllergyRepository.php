@@ -11,7 +11,7 @@ use App\Http\Resources\UserAllergyResource;
 
 class AllergyRepository implements AllergyInterface
 {
-    public function myAllergies(array $data): array
+    public function index(array $data): array
     {
         $data = (object) $data;
         $user = User::find($data->auth_user->id);
@@ -27,7 +27,7 @@ class AllergyRepository implements AllergyInterface
         ];
     }
 
-    public function pickAllergies(array $data): array
+    public function store(array $data): array
     {
         $data = (object) $data;
         $user = User::find($data->auth_user->id);

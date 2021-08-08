@@ -62,13 +62,13 @@ class MealController extends Controller
     }
 
     /**
-     * Show Single Meal Details
+     * Find Meal Details
      *
      * @OA\Get(
      *      path="/meals/{id}",
      *      tags={"Meals"},
-     *      summary="Show meals and their respective allergies, main item and side items",
-     *      description="Show meals and their respective allergies, main item and side items",
+     *      summary="Find meal and its respective allergies, main item and side items",
+     *      description="Find meal and its respective allergies, main item and side items",
      *
      *      @OA\Parameter(
      *          name="id",
@@ -108,9 +108,9 @@ class MealController extends Controller
      *
      */
     
-    public function show(int $id)
+    public function find(int $id)
     {
-        $response = $this->mealInterface->show($id);
+        $response = $this->mealInterface->find($id);
         return response()->json($response, 200);
     }
 

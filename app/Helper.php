@@ -26,7 +26,7 @@ class Helper
 
     public static function authUser($token)
     {
-        $user = User::where('bearer_token', $token)->active()->first();
+        $user = User::where('bearer_token', $token)->first();
         
         if (!$user) {
             throw new CustomApiErrorResponseHandler("Unauthorized access.", 401);

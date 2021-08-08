@@ -21,15 +21,14 @@ Route::group(
             Route::post('/login', 'UserController@login')->name('accounts.login');
         });
 
-        Route::group(['prefix' => 'users', 'middleware' => ['v1.authenticate.user']], function () {
-            Route::get('/my-allergies', 'AllergyController@myAllergies')->name('users.allergies.index');
-            Route::post('/allergies', 'AllergyController@pickAllergies')->name('users.allergies.pick');
-            Route::get('/meals/recommendations', 'MealController@userRecommendations')->name('users.meals.recommendations');
+        Route::group(['prefix' => 'allergies', 'middleware' => ['v1.authenticate.user']], function () {
+            Route::get('/', 'AllergyController@index')->name('allergies.index');
+            Route::post('/', 'AllergyController@store')->name('allergies.store');
         });
 
         Route::group(['prefix' => 'meals'], function () {
             Route::get('/', 'MealController@index')->name('meals.index');
-            Route::get('/{id}', 'MealController@show')->name('meals.show');
+            Route::get('/{id}', 'MealController@find')->name('meals.find');
             Route::post('/recommendations', 'MealController@recommendations')->name('meals.recommendations');
         });
     }

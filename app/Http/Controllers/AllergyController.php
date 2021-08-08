@@ -19,7 +19,7 @@ class AllergyController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/users/my-allergies",
+     *      path="/allergies",
      *      tags={"Users"},
      *      security={{"bearer_token":{}}},
      *      summary="Show user allergies",
@@ -54,9 +54,9 @@ class AllergyController extends Controller
      *     )
      */
 
-    public function myAllergies(Request $request)
+    public function index(Request $request)
     {
-        $response = $this->allergyInterface->myAllergies($request->all());
+        $response = $this->allergyInterface->index($request->all());
         return response()->json($response, 200);
     }
 
@@ -65,7 +65,7 @@ class AllergyController extends Controller
      *
      * @OA\Post(
      *
-     *      path="/users/allergies",
+     *      path="/allergies",
      *      summary="Pick one or more allergies",
      *      description="Pick one or more allergies",
      *      security={{"bearer_token":{}}},
@@ -137,7 +137,7 @@ class AllergyController extends Controller
      *
      */
 
-    public function pickAllergies(Request $request)
+    public function store(Request $request)
     {
         $allergyRequest  = new PickAllergyRequest();
         $validator = Validator::make($request->all(), $allergyRequest->rules(), $allergyRequest->messages());
@@ -146,7 +146,7 @@ class AllergyController extends Controller
             throw new CustomApiErrorResponseHandler($validator->errors()->first());
         }
         
-        $response = $this->allergyInterface->pickAllergies($request->all());
+    $response = $this->allergyInterface->store($request->all());
     
         return response()->json($response, 201);
     }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Helpers;
+use App\Helper;
 use App\Exceptions\CustomApiErrorResponseHandler;
 use Closure;
 use Illuminate\Http\Request;
@@ -18,13 +18,13 @@ class AuthenticateUser
      */
     public function handle(Request $request, Closure $next)
     {
-        $token = Helpers::decodeBearerToken($request);
+        $token = Helper::decodeBearerToken($request);
         
         if (!$token) {
             throw new CustomApiErrorResponseHandler("Unauthorized access.", 401);
         }
         
-        $user = Helpers::authUser($token);
+        $user = Helper::authUser($token);
         $request->merge(['auth_user' => $user]);
         
         return $next($request);

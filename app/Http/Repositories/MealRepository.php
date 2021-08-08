@@ -27,7 +27,7 @@ class MealRepository implements MealInterface
         ];
     }
 
-    public function show(int $id): array
+    public function find(int $id): array
     {
         $meal = Meal::find($id);
         
