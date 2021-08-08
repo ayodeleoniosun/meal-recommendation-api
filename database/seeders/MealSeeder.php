@@ -40,12 +40,12 @@ class MealSeeder extends Seeder
                     ]);
                 }
 
-                $allergy = $allergies->random(2)->first();
-                
-                factory(MealToAllergy::class, $count)->create([
-                    'meal_id' => $meal->id,
-                    'allergy_id' => $allergy->id
-                ]);
+                foreach ($allergies as $allergy) {
+                    factory(MealToAllergy::class, $count)->create([
+                        'meal_id' => $meal->id,
+                        'allergy_id' => $allergy->id
+                    ]);
+                }
             }
         });
     }
