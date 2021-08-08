@@ -33,10 +33,10 @@ class MealSeeder extends Seeder
                 
                 $sideItems = $sideItems->random(3);
                     
-                foreach ($sideItems as $side_item) {
+                foreach ($sideItems as $sideItem) {
                     factory(MealToSideItem::class, $count)->create([
                         'meal_id' => $meal->id,
-                        'side_item_id' => $side_item->id
+                        'side_item_id' => $sideItem->id
                     ]);
                 }
 

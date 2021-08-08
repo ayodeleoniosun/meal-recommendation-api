@@ -56,7 +56,6 @@ class AllergyController extends Controller
 
     public function myAllergies(Request $request)
     {
-        dd("sss");
         $response = $this->allergyInterface->myAllergies($request->all());
         return response()->json($response, 200);
     }
