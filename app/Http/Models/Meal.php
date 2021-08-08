@@ -13,11 +13,6 @@ class Meal extends Model
     protected $table = 'meals';
     protected $fillable = ['name'];
 
-    public function scopeActive($query)
-    {
-        return $query->where('active_status', ActiveStatus::ACTIVE);
-    }
-    
     public function mainItem()
     {
         return $this->hasOne(MainItem::class);

@@ -11,9 +11,4 @@ class MealToAllergy extends Model
     use HasFactory;
 
     protected $table = 'meal_to_allergies';
-
-    public function scopeActive($query)
-    {
-        return $query->where('active_status', ActiveStatus::ACTIVE);
-    }
 }

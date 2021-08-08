@@ -13,11 +13,6 @@ class MainItem extends Model
     protected $table = 'main_items';
     protected $fillable = ['name'];
 
-    public function scopeActive($query)
-    {
-        return $query->where('active_status', ActiveStatus::ACTIVE);
-    }
-
     public function meal()
     {
         return $this->belongsTo(Meal::class);
