@@ -18,6 +18,7 @@ class CreateMealToSideItemsTable extends Migration
             $table->unsignedBigInteger('meal_id');
             $table->unsignedBigInteger('side_item_id');
             $table->timestamps();
+            $table->softDeletes();
             
             $table->foreign('meal_id')->references('id')->on('meals')->onDelete('cascade');
             $table->foreign('side_item_id')->references('id')->on('side_items')->onDelete('cascade');

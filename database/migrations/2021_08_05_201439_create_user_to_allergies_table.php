@@ -18,6 +18,7 @@ class CreateUserToAllergiesTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('allergy_id');
             $table->timestamps();
+            $table->softDeletes();
             
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('allergy_id')->references('id')->on('allergies')->onDelete('cascade');

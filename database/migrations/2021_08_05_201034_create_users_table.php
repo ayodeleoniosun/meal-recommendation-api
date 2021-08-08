@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('bearer_token');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

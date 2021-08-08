@@ -18,6 +18,7 @@ class CreateMainItemsTable extends Migration
             $table->unsignedBigInteger('meal_id');
             $table->string('name');
             $table->timestamps();
+            $table->softDeletes();
             
             $table->foreign('meal_id')->references('id')->on('meals')->onDelete('cascade');
         });

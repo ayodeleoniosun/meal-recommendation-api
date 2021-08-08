@@ -18,6 +18,8 @@ class CreateAllergiesTable extends Migration
             $table->id();
             $table->string('name');
             $table->timestamps();
+            $table->softDeletes();
+
         });
 
         $allergies = collect(['Nut Allergy', 'ShellFish Allergy', 'SeaFood Allergy']);
