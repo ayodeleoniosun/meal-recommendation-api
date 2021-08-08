@@ -17,9 +17,8 @@ class CreateMealsTable extends Migration
             $table->id();
             $table->string('name');
             $table->timestamps();
-            $table->unsignedBigInteger('active_status')->default(1);
+            $table->softDeletes();
 
-            $table->foreign('active_status')->references('id')->on('active_status')->onDelete('cascade');
         });
     }
 

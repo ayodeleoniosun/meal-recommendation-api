@@ -2,12 +2,12 @@
 
 namespace Database\Seeders;
 
-use App\Api\V1\Models\Allergy;
-use App\Api\V1\Models\MainItem;
-use App\Api\V1\Models\Meal;
-use App\Api\V1\Models\MealToAllergy;
-use App\Api\V1\Models\MealToSideItem;
-use App\Api\V1\Models\SideItem;
+use App\Http\Models\Allergy;
+use App\Http\Models\MainItem;
+use App\Http\Models\Meal;
+use App\Http\Models\MealToAllergy;
+use App\Http\Models\MealToSideItem;
+use App\Http\Models\SideItem;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -33,10 +33,10 @@ class MealSeeder extends Seeder
                 
                 $sideItems = $sideItems->random(3);
                     
-                foreach ($sideItems as $side_item) {
+                foreach ($sideItems as $sideItem) {
                     factory(MealToSideItem::class, $count)->create([
                         'meal_id' => $meal->id,
-                        'side_item_id' => $side_item->id
+                        'side_item_id' => $sideItem->id
                     ]);
                 }
 

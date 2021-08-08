@@ -20,11 +20,8 @@ class CreateUsersTable extends Migration
             $table->string('email_address')->unique();
             $table->string('phone_number');
             $table->string('password');
-            $table->string('bearer_token');
             $table->timestamps();
-            $table->unsignedBigInteger('active_status')->default(1);
-
-            $table->foreign('active_status')->references('id')->on('active_status')->onDelete('cascade');
+            $table->softDeletes();
         });
     }
 

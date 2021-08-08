@@ -18,9 +18,8 @@ class CreateMainItemsTable extends Migration
             $table->unsignedBigInteger('meal_id');
             $table->string('name');
             $table->timestamps();
-            $table->unsignedBigInteger('active_status')->default(1);
-
-            $table->foreign('active_status')->references('id')->on('active_status')->onDelete('cascade');
+            $table->softDeletes();
+            
             $table->foreign('meal_id')->references('id')->on('meals')->onDelete('cascade');
         });
     }

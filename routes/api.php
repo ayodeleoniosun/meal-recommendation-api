@@ -2,7 +2,6 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -15,22 +14,25 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(
-    ['prefix' => 'v1', 'namespace' => 'App\Api\V1\Controllers'],
+    ['prefix' => 'v1', 'namespace' => 'App\Http\Controllers'],
     function () {
-        Route::group(['prefix' => 'accounts'], function () {
-            Route::post('/register', 'UserController@register')->name('accounts.register');
-            Route::post('/login', 'UserController@login')->name('accounts.login');
+        Route::group(['prefix' => 'users'], function () {
+            Route::post('/register', 'UserController@register')->name('users.register');
+            Route::post('/login', 'UserController@login')->name('users.login');
+
+            Route::group(['middleware' => ['auth:sanctum']], function () {
+                Route::get('/meals/recommendations', 'UserController@mealRecommendations')->name('users.meals.recommendation');
+            });
         });
 
-        Route::group(['prefix' => 'users', 'middleware' => ['v1.authenticate.user']], function () {
-            Route::get('/my-allergies', 'AllergyController@myAllergies')->name('users.allergies.index');
-            Route::post('/allergies', 'AllergyController@pickAllergies')->name('users.allergies.pick');
-            Route::get('/meals/recommendations', 'MealController@userRecommendations')->name('users.meals.recommendations');
+        Route::group(['prefix' => 'allergies', 'middleware' => ['auth:sanctum']], function () {
+            Route::get('/', 'AllergyController@index')->name('allergies.index');
+            Route::post('/', 'AllergyController@store')->name('allergies.store');
         });
 
         Route::group(['prefix' => 'meals'], function () {
             Route::get('/', 'MealController@index')->name('meals.index');
-            Route::get('/{id}', 'MealController@show')->name('meals.show');
+            Route::get('/{id}', 'MealController@find')->name('meals.find');
             Route::post('/recommendations', 'MealController@recommendations')->name('meals.recommendations');
         });
     }

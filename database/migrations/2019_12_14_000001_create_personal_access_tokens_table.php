@@ -1,11 +1,10 @@
 <?php
 
-use App\Http\Models\Allergy;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAllergiesTable extends Migration
+class CreatePersonalAccessTokensTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,19 +13,15 @@ class CreateAllergiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('allergies', function (Blueprint $table) {
-            $table->id();
+        Schema::create('personal_access_tokens', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->morphs('tokenable');
             $table->string('name');
+            $table->string('token', 64)->unique();
+            $table->text('abilities')->nullable();
+            $table->timestamp('last_used_at')->nullable();
             $table->timestamps();
-            $table->softDeletes();
-
         });
-
-        $allergies = collect(['Nut Allergy', 'ShellFish Allergy', 'SeaFood Allergy']);
-
-        foreach ($allergies as $allergy) {
-            Allergy::create(['name' => $allergy]);
-        }
     }
 
     /**
@@ -36,6 +31,6 @@ class CreateAllergiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('allergies');
+        Schema::dropIfExists('personal_access_tokens');
     }
 }
