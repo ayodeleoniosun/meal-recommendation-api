@@ -24,7 +24,7 @@ class UserController extends Controller
      *      path="/users/register",
      *      summary="Sign up a new account",
      *      description="Sign up a new account",
-     *      tags={"Accounts"},
+     *      tags={"Users"},
      *      @OA\RequestBody(
      *         @OA\JsonContent(
      *           type="object",
@@ -105,7 +105,7 @@ class UserController extends Controller
      *      path="/users/login",
      *      summary="Login to an existing account",
      *      description="Login to an existing account",
-     *      tags={"Accounts"},
+     *      tags={"Users"},
      *      @OA\RequestBody(
      *         @OA\JsonContent(
      *           type="object",

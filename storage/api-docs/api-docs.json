@@ -22,7 +22,7 @@
         "/allergies": {
             "get": {
                 "tags": [
-                    "Users"
+                    "Allergies"
                 ],
                 "summary": "Show user allergies",
                 "description": "Show user allergies",
@@ -70,7 +70,7 @@
             },
             "post": {
                 "tags": [
-                    "Users"
+                    "Allergies"
                 ],
                 "summary": "Pick one or more allergies",
                 "description": "Pick one or more allergies",
@@ -327,7 +327,7 @@
         "/users/register": {
             "post": {
                 "tags": [
-                    "Accounts"
+                    "Users"
                 ],
                 "summary": "Sign up a new account",
                 "description": "Sign up a new account",
@@ -423,7 +423,7 @@
         "/users/login": {
             "post": {
                 "tags": [
-                    "Accounts"
+                    "Users"
                 ],
                 "summary": "Login to an existing account",
                 "description": "Login to an existing account",

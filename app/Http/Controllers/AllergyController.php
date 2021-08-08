@@ -17,7 +17,7 @@ class AllergyController extends Controller
     /**
      * @OA\Get(
      *      path="/allergies",
-     *      tags={"Users"},
+     *      tags={"Allergies"},
      *      security={{"bearer_token":{}}},
      *      summary="Show user allergies",
      *      description="Show user allergies",
@@ -66,7 +66,7 @@ class AllergyController extends Controller
      *      summary="Pick one or more allergies",
      *      description="Pick one or more allergies",
      *      security={{"bearer_token":{}}},
-     *      tags={"Users"},
+     *      tags={"Allergies"},
      *      @OA\RequestBody(
      *         @OA\JsonContent(
      *           type="object",
