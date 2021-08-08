@@ -18,6 +18,6 @@ trait User
             'phone_number' => '080'.rand(111111111, 999999999),
         ];
 
-        return $this->json('POST', $this->route("/accounts/register"), $data);
+        return $this->json('POST', $this->route("/users/register"), $data);
     }
 }

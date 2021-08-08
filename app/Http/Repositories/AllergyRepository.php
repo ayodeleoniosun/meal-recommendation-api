@@ -36,8 +36,11 @@ class AllergyRepository implements AllergyInterface
             throw new CustomApiErrorResponseHandler("No new allergies added");
         }
 
+        $userAllergies = $user->load('allergies');
+
         return [
             'status' => 'success',
+            'user_allergies' => $userAllergies,
             'message' => $countSynced.' new allergies successfully added'
         ];
     }

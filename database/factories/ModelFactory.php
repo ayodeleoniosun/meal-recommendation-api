@@ -60,8 +60,7 @@ $factory->define(
             'last_name' => $faker->lastName,
             'phone_number' => '080'.rand(111111111, 999999999),
             'email_address' => $faker->unique()->safeEmail,
-            'password' => bcrypt('secret'),
-            'bearer_token' => Helper::generateBearerToken()
+            'password' => bcrypt('secret')
         ];
      }
  );

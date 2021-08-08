@@ -16,9 +16,13 @@ use Illuminate\Support\Facades\Route;
 Route::group(
     ['prefix' => 'v1', 'namespace' => 'App\Http\Controllers'],
     function () {
-        Route::group(['prefix' => 'accounts'], function () {
-            Route::post('/register', 'UserController@register')->name('accounts.register');
-            Route::post('/login', 'UserController@login')->name('accounts.login');
+        Route::group(['prefix' => 'users'], function () {
+            Route::post('/register', 'UserController@register')->name('users.register');
+            Route::post('/login', 'UserController@login')->name('users.login');
+
+            Route::group(['middleware' => ['auth:sanctum']], function () {
+                Route::get('/meals/recommendations', 'UserController@mealRecommendations')->name('users.meals.recommendation');
+            });
         });
 
         Route::group(['prefix' => 'allergies', 'middleware' => ['auth:sanctum']], function () {

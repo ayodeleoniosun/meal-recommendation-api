@@ -3,12 +3,12 @@
 namespace Tests\Feature;
 
 use Tests\Traits\User as TraitsUser;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Tests\Traits\Allergy as TraitsAllergy;
 use Tests\TestCase;
 
 class UserControllerTest extends TestCase
 {
-    use DatabaseTransactions, TraitsUser;
+    use TraitsUser, TraitsAllergy;
 
     public function setUp(): void
     {
@@ -25,10 +25,10 @@ class UserControllerTest extends TestCase
             'phone_number' => ''
         ];
         
-        $response = $this->json('POST', $this->route("/accounts/register"), $data);
-        $response->assertStatus(400);
-        $this->assertEquals($response->getData()->status, 'error');
-        $this->assertEquals($response->getData()->message, 'Phone number is required');
+        $response = $this->json('POST', $this->route("/users/register"), $data);
+        $response->assertStatus(422);
+        $this->assertEquals($response->json('message'), 'The given data was invalid.');
+        $this->assertEquals($response->json('errors.phone_number')[0], 'Phone number is required');
     }
 
     public function testPasswordMinimumCharacters()
@@ -41,10 +41,10 @@ class UserControllerTest extends TestCase
             'phone_number' => '080'.rand(111111111, 999999999),
         ];
 
-        $response = $this->json('POST', $this->route("/accounts/register"), $data);
-        $response->assertStatus(400);
-        $this->assertEquals($response->getData()->status, 'error');
-        $this->assertEquals($response->getData()->message, 'Password must not be less than 6 characters');
+        $response = $this->json('POST', $this->route("/users/register"), $data);
+        $response->assertStatus(422);
+        $this->assertEquals($response->json('message'), 'The given data was invalid.');
+        $this->assertEquals($response->json('errors.password')[0], 'Password must not be less than 6 characters');
     }
 
     public function testPhoneNumberMinimumCharacters()
@@ -57,10 +57,10 @@ class UserControllerTest extends TestCase
             'phone_number' => '080'.rand(111, 999),
         ];
 
-        $response = $this->json('POST', $this->route("/accounts/register"), $data);
-        $response->assertStatus(400);
-        $this->assertEquals($response->getData()->status, 'error');
-        $this->assertEquals($response->getData()->message, 'Phone number should not be less than 10 characters');
+        $response = $this->json('POST', $this->route("/users/register"), $data);
+        $response->assertStatus(422);
+        $this->assertEquals($response->json('message'), 'The given data was invalid.');
+        $this->assertEquals($response->json('errors.phone_number')[0], 'Phone number should not be less than 10 characters');
     }
 
     public function testPhoneNumberMaximumCharacters()
@@ -73,10 +73,10 @@ class UserControllerTest extends TestCase
             'phone_number' => '080'.rand(11111111111111, 99999999999999),
         ];
 
-        $response = $this->json('POST', $this->route("/accounts/register"), $data);
-        $response->assertStatus(400);
-        $this->assertEquals($response->getData()->status, 'error');
-        $this->assertEquals($response->getData()->message, 'Phone number should not be more than 15 characters');
+        $response = $this->json('POST', $this->route("/users/register"), $data);
+        $response->assertStatus(422);
+        $this->assertEquals($response->json('message'), 'The given data was invalid.');
+        $this->assertEquals($response->json('errors.phone_number')[0], 'Phone number should not be more than 15 characters');
     }
 
     public function testEmailAddressExist()
@@ -85,9 +85,9 @@ class UserControllerTest extends TestCase
         $emailAddress = $user->getData()->user->email_address;
         $response = $this->registerUser($emailAddress);
 
-        $response->assertStatus(400);
-        $this->assertEquals($response->getData()->status, 'error');
-        $this->assertEquals($response->getData()->message, 'Email address already exist');
+        $response->assertStatus(422);
+        $this->assertEquals($response->json('message'), 'The given data was invalid.');
+        $this->assertEquals($response->json('errors.email_address')[0], 'Email address already exist');
     }
 
     public function testRegistrationSuccessful()
@@ -102,8 +102,8 @@ class UserControllerTest extends TestCase
             ]
         );
 
-        $this->assertEquals($response->getData()->status, 'success');
-        $this->assertEquals($response->getData()->message, 'Registration successful.');
+        $this->assertEquals($response->json('status'), 'success');
+        $this->assertEquals($response->json('message'), 'Registration successful.');
     }
 
     public function testIncorrectLoginDetails()
@@ -113,10 +113,10 @@ class UserControllerTest extends TestCase
             'password' => 'secret',
         ];
 
-        $response = $this->json('POST', $this->route("/accounts/login"), $data);
+        $response = $this->json('POST', $this->route("/users/login"), $data);
         $response->assertStatus(400);
-        $this->assertEquals($response->getData()->status, 'error');
-        $this->assertEquals($response->getData()->message, 'Incorrect login credentials. Try again.');
+        $this->assertEquals($response->json('status'), 'error');
+        $this->assertEquals($response->json('message'), 'Incorrect login credentials. Try again.');
     }
 
     public function testLoginSuccessful()
@@ -128,9 +128,32 @@ class UserControllerTest extends TestCase
             'password' => 'secret',
         ];
         
-        $response = $this->json('POST', $this->route("/accounts/login"), $data);
+        $response = $this->json('POST', $this->route("/users/login"), $data);
         $response->assertStatus(200);
-        $this->assertEquals($response->getData()->status, 'success');
-        $this->assertEquals($response->getData()->message, 'Login successful');
+        $this->assertEquals($response->json('status'), 'success');
+        $this->assertEquals($response->json('message'), 'Login successful');
     }
+
+    public function testMealRecommendations()
+    {
+        $user = $this->registerUser();
+        $token = $user->json('user.bearer_token');
+        $this->pickAllergy($token);
+
+        $response = $this->req($token)->json('GET', $this->route("/users/meals/recommendations"));
+        $response->assertStatus(200);
+        $this->assertEquals($response->json('status'), 'success');
+        $response->assertJsonStructure([
+            'status',
+            'recommendations' => [
+                '*' => [
+                    'user' => ['id', 'first_name', 'last_name', 'email_address', 'phone_number', 'created_at', 'updated_at'],
+                    'recommendations' => [
+                        '*' => ['id', 'name', 'created_at', 'updated_at']
+                    ]
+                ]
+            ]
+        ]);
+    }
+
 }

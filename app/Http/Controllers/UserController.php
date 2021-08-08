@@ -2,23 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Interfaces\MealInterface;
 use App\Http\Interfaces\UserInterface;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRegistrationRequest;
 class UserController extends Controller
 {
     protected $userInterface;
+    protected $mealInterface;
 
-    public function __construct(UserInterface $userInterface)
+    public function __construct(UserInterface $userInterface, MealInterface $mealInterface)
     {
         $this->userInterface = $userInterface;
+        $this->mealInterface = $mealInterface;
     }
 
     /**
      * User Registration
      *
      * @OA\Post(
-     *      path="/accounts/register",
+     *      path="/users/register",
      *      summary="Sign up a new account",
      *      description="Sign up a new account",
      *      tags={"Accounts"},
@@ -99,7 +102,7 @@ class UserController extends Controller
      * User Login
      *
      * @OA\Post(
-     *      path="/accounts/login",
+     *      path="/users/login",
      *      summary="Login to an existing account",
      *      description="Login to an existing account",
      *      tags={"Accounts"},
@@ -170,6 +173,52 @@ class UserController extends Controller
     public function login(Request $request)
     {
         $response = $this->userInterface->login($request->all());
+        return response()->json($response, 200);
+    }
+
+    /**
+     * Show logged user meals recommendation
+     *
+     * @OA\Get(
+     *      path="/users/meals/recommendations",
+     *      tags={"Meals"},
+     *      security={{"bearer_token":{}}},
+     *      summary="Show logged in user meal recommendations based on his allergy",
+     *      description="Show logged in user meal recommendations based on his allergy",
+     *
+     *     @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          content={
+     *              @OA\MediaType(
+     *                  mediaType="application/json",
+     *              @OA\Schema(
+     *                @OA\Property(
+        *                  property="status",
+        *                  type="string",
+        *                  description="The response code"
+     *                 ),
+     *                 @OA\Property(
+     *                      property="recommendations",
+     *                      type="array",
+     *                      description="The response data",
+     *                      @OA\Items()
+     *                  ),
+     *              )
+     *           )
+     *         }
+     *      ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=401, description="Unauthorized access"),
+     *      @OA\Response(response=404, description="Resource not found"),
+     *      @OA\Response(response=500, description="An error occured."),
+     *     )
+     */
+
+    public function mealRecommendations(Request $request)
+    {
+        $users = ['users' => (array) $request->user()->id];
+        $response = $this->mealInterface->recommendations($users);
         return response()->json($response, 200);
     }
 }

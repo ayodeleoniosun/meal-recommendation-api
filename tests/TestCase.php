@@ -2,14 +2,15 @@
 
 namespace Tests;
 
-use App\Modules\Http\Models\User;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Tests\CreatesApplication;
 use Tests\Traits\User as TraitsUser;
+use Tests\Traits\Meal as TraitsMeal;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 abstract class TestCase extends BaseTestCase
 {
-    use CreatesApplication, TraitsUser;
+    use DatabaseMigrations, CreatesApplication, TraitsUser, TraitsMeal;
     public $baseURL;
     protected $user;
 
@@ -17,8 +18,8 @@ abstract class TestCase extends BaseTestCase
     {
         parent::setUp();
         $this->baseURL = sprintf('http://%s/api/v1', env('APP_DOMAIN'));
-        dd($this->baseURL);
         $this->faker = \Faker\Factory::create();
+        $this->seedMeals();
     }
 
     public function route($route) : string

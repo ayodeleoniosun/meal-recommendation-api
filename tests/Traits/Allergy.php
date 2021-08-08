@@ -13,6 +13,6 @@ trait Allergy
     {
         $allergies = factory(AllergyModel::class, 3)->create();
         $allergies = $allergies->pluck('id')->toArray();
-        return $this->req($token)->json('POST', $this->route("/users/allergies"), ["allergies" => $allergies]);
+        return $this->req($token)->json('POST', $this->route("/allergies"), ["allergies" => $allergies]);
     }
 }

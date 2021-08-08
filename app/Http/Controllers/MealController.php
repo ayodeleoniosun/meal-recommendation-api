@@ -112,57 +112,12 @@ class MealController extends Controller
     }
 
     /**
-     * Show logged user meals recommendation
-     *
-     * @OA\Get(
-     *      path="/users/meals/recommendations",
-     *      tags={"Meals"},
-     *      security={{"bearer_token":{}}},
-     *      summary="Show logged in user meal recommendations based on his allergy",
-     *      description="Show logged in user meal recommendations based on his allergy",
-     *
-     *     @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *          content={
-     *              @OA\MediaType(
-     *                  mediaType="application/json",
-     *              @OA\Schema(
-     *                @OA\Property(
-        *                  property="status",
-        *                  type="string",
-        *                  description="The response code"
-     *                 ),
-     *                 @OA\Property(
-     *                      property="recommendations",
-     *                      type="array",
-     *                      description="The response data",
-     *                      @OA\Items()
-     *                  ),
-     *              )
-     *           )
-     *         }
-     *      ),
-     *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=401, description="Unauthorized access"),
-     *      @OA\Response(response=404, description="Resource not found"),
-     *      @OA\Response(response=500, description="An error occured."),
-     *     )
-     */
-
-    public function userRecommendations(Request $request)
-    {
-        $response = $this->mealInterface->userRecommendations($request->all());
-        return response()->json($response, 200);
-    }
-
-    /**
-     * Show meals recommendations for multiple users
+     * Show meals recommendations for either single or multiple users
      *
      * @OA\Post(
      *      path="/meals/recommendations",
-     *      summary="Show meals recommendations for multiple users",
-     *      description="Show meals recommendations for multiple users",
+     *      summary="Show meals recommendations for either single or multiple  users",
+     *      description="Show meals recommendations for either single or multiple  users",
      *      tags={"Meals"},
      *      @OA\RequestBody(
      *         @OA\JsonContent(
@@ -178,7 +133,7 @@ class MealController extends Controller
      *
      *      @OA\Response(
      *          response=200,
-     *          description="successful registration",
+     *          description="successful operation",
      *          content={
      *              @OA\MediaType(
      *                 mediaType="application/json",

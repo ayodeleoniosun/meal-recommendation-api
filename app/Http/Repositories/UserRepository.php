@@ -27,6 +27,7 @@ class UserRepository implements UserInterface
         ]);
 
         $token = $user->createToken('auth_token')->plainTextToken;
+        $user->bearer_token = $token;
         
         return [
             'status' => 'success',

@@ -2,15 +2,12 @@
 
 namespace Tests\Feature;
 
-use App\Http\Models\Allergy;
-use App\Http\Models\User;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Tests\Traits\User as TraitsUser;
 use Tests\TestCase;
 use Tests\Traits\Allergy as TraitsAllergy;
-
 class AllergyControllerTest extends TestCase
 {
-    use DatabaseTransactions, TraitsAllergy;
+    use TraitsAllergy, TraitsUser;
 
     public function setUp(): void
     {
@@ -19,10 +16,10 @@ class AllergyControllerTest extends TestCase
 
     public function testPickAllergyFailure()
     {
-        $response = $this->req()->json('POST', $this->route("/users/allergies"));
-        $response->assertStatus(400);
-        $this->assertEquals($response->getData()->status, 'error');
-        $this->assertEquals($response->getData()->message, 'Select at least one allergy');
+        $response = $this->req()->json('POST', $this->route("/allergies"));
+        $response->assertStatus(422);
+        $this->assertEquals($response->json('message'), 'The given data was invalid.');
+        $this->assertEquals($response->json('errors.allergies')[0], 'Select at least one allergy');
     }
 
     public function testPickAllergySuccessful()
@@ -31,18 +28,18 @@ class AllergyControllerTest extends TestCase
         $response->assertStatus(201);
         $response->assertJsonStructure([
             'status',
-            'allergies',
+            'user_allergies',
             'message'
         ]);
     }
 
     public function testShowUserAllergies()
     {
-        $allergies = $this->pickAllergy();
-        $user_id = $allergies->getData()->allergies[0]->pivot->user_id;
-        $token = User::find($user_id)->bearer_token;
+        $user = $this->registerUser();
+        $token = $user->json('user.bearer_token');
+        $this->pickAllergy($token);
         
-        $response = $this->req($token)->json('GET', $this->route("/users/my-allergies"));
+        $response = $this->req($token)->json('GET', $this->route("/allergies"));
         $response->assertStatus(200);
         $this->assertEquals($response->getData()->status, 'success');
         $response->assertJsonStructure([
