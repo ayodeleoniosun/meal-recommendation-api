@@ -37,8 +37,6 @@ trait Meal
                 ]);
             }
 
-            $allergy = $allergies->random(2)->first();
-            
             foreach ($allergies as $allergy) {
                 factory(MealToAllergy::class, $count)->create([
                     'meal_id' => $meal->id,
