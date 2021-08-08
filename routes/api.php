@@ -2,7 +2,6 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -15,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(
-    ['prefix' => 'v1', 'namespace' => 'App\Api\V1\Controllers'],
+    ['prefix' => 'v1', 'namespace' => 'App\Http\Controllers'],
     function () {
         Route::group(['prefix' => 'accounts'], function () {
             Route::post('/register', 'UserController@register')->name('accounts.register');

@@ -176,9 +176,9 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         //Custom Service Providers
-        App\Providers\V1\UserServiceProvider::class,
-        App\Providers\V1\AllergyServiceProvider::class,
-        App\Providers\V1\MealServiceProvider::class,
+        App\Providers\UserServiceProvider::class,
+        App\Providers\AllergyServiceProvider::class,
+        App\Providers\MealServiceProvider::class,
     ],
 
     /*
